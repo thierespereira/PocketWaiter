@@ -188,8 +188,29 @@
                     <input type="text" data-clear-btn="true" name="phone" id="phone" value="<?php echo isset($_POST['phone']) ? $_POST['phone'] : '' ?>">
                     <label for="textarea">Address:</label>
                     <textarea name="address" id="address"><?php echo isset($_POST['address']) ? $_POST['address'] : '' ?></textarea>
+                    <?php
+                        echo '<div class="ui-field-contain">';
+                            if($_SESSION['user_type'] == 'admin') {
+                            echo '<label for="user_type">Account Type:</label>';
+                            echo '<select id="user_type" name="user_type">';
+                                echo '<option value="customer"' . ($type == 'customer' ? 'selected="selected"' : '' ) .'>Customer</option>';
+                                echo '<option value="admin"' . ($type == 'admin' ? 'selected="selected"' : '' ) . '>Administrator</option>';
+                                echo '<option value="adminstaff"' . ($type == 'adminstaff' ? 'selected="selected"' : '' ) . '>Staff Member</option>';
+                                echo '<option value="staff"' . ($type == 'staff' ? 'selected="selected"' : '' ) .'>Staff</option>';
+                            echo '</select>';
+                        echo '</div>';
+                        }
+                     ?>
                     <button type="submit" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Register</button>
-                    <a href="index.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
+                    <?php
+                        if(!isset($_SESSION['user_type'])) {
+                            echo '<a href="index.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                        } else if($_SESSION['user_type']  == 'admin') {
+                            echo '<a href="administrator.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                        } else {
+                            echo '<a href="index.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                        }
+                    ?>
                 </form>
             </div><!-- /content -->
 

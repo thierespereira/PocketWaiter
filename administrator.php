@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Admin</title>
+        <title>Administrator</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
         <script src="js/jquery-1.11.1.min.js"></script>
@@ -57,6 +57,7 @@
                             echo '      <th data-priority="3">Type</th>';
                             echo '    </tr>';
                             echo '</thead>';
+                            echo '<a href="register.php" data-transition="slide" class="ui-btn ui-btn-b ui-shadow">Create New User</a>';
                             echo '<tbody>';
 
                             while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
