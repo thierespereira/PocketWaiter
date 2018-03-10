@@ -21,13 +21,13 @@
                 }
 
 
-                if($_SESSION['user_type']  != 'delivery') {
+                if($_SESSION['user_type']  != 'staff') {
                     echo '<script>window.location = "index.php" </script>';
                     die;
                 }
 
                 if(!isset($_GET['id'])) {
-                    echo '<script>window.location = "delivery.php"</script>';
+                    echo '<script>window.location = "staff.php"</script>';
                     die;
                 }
 
@@ -82,7 +82,7 @@
                 } else {
                     echo '<a href="print_order.php?id=' . $_GET['id'] . '" target="_blank" class="ui-btn ui-icon-action ui-btn-icon-left ui-btn-b">Print Packaging Slip</a>';
                 }
-                echo '<a href="delivery.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b">Return</a>';
+                echo '<a href="staff.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b">Return</a>';
                 echo '</form>';
             ?>
         </div>

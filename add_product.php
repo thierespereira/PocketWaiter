@@ -125,7 +125,7 @@
                         if(!empty($registered)) {
                             echo '<div id="message" style="background-color:lightgreen;">';
                             echo 'Product added successfully.<br>';
-                            echo 'Please click <a href="employee.php">here</a> to view a list of products.';
+                            echo 'Please click <a href="staffadmin.php">here</a> to view a list of products.';
                             echo '<br>';
                             echo '</div><br>';
                         }
@@ -140,7 +140,7 @@
                     <label for="price">Price:</label>
                     <input type="text" data-clear-btn="true" name="price" id="price" value="<?php echo (isset($_POST['price']) && !$registered) ? $_POST['price'] : '' ?>">
                     <button type="submit" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>
-                    <a href="employee.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
+                    <a href="staffadmin.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
                 </form>
             </div><!-- /content -->
 

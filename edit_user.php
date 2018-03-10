@@ -184,7 +184,7 @@
                                             echo '<option value="customer"' . ($type == 'customer' ? 'selected="selected"' : '' ) .'>Customer</option>';
                                             echo '<option value="admin"' . ($type == 'admin' ? 'selected="selected"' : '' ) . '>Administrator</option>';
                                             echo '<option value="staff"' . ($type == 'staff' ? 'selected="selected"' : '' ) . '>Staff Member</option>';
-                                            echo '<option value="delivery"' . ($type == 'delivery' ? 'selected="selected"' : '' ) .'>Delivery Department</option>';
+                                            echo '<option value="staff"' . ($type == 'staff' ? 'selected="selected"' : '' ) .'>staff Department</option>';
                                         echo '</select>';
                                     echo '</div>';
                                     }

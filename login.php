@@ -97,14 +97,14 @@
 
                                     echo '<script>window.location = "customer.php" </script>';
                                     die;
-                                } else if($type == 'staff') {
-                                    echo '<script>window.location = "employee.php" </script>';
+                                } else if($type == 'staffadmin') {
+                                    echo '<script>window.location = "staffadmin.php" </script>';
                                     die;
                                 } else if($type == 'admin') {
                                     echo '<script>window.location = "administrator.php" </script>';
                                     die;
-                                } else if($type == 'delivery') {
-                                    echo '<script>window.location = "delivery.php" </script>';
+                                } else if($type == 'staff') {
+                                    echo '<script>window.location = "staff.php" </script>';
                                     die;
                                 }
                             } else {

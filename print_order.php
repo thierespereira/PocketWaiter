@@ -5,7 +5,7 @@
         die;
     }
 
-    if($_SESSION['user_type'] != 'delivery') {
+    if($_SESSION['user_type'] != 'staff') {
         echo '<script>window.location = "index.php"</script>';
         die;
     }
@@ -133,7 +133,7 @@ $pdf->Write( 46, "Customer: " . $customer);
 $pdf->Ln( 6 );
 $pdf->Write( 46, "Phone number: " . $phone);
 $pdf->Ln( 6 );
-$pdf->Write( 46, "Delivery Address: " . $address);
+$pdf->Write( 46, "staff Address: " . $address);
 $pdf->SetTextColor( $textColour[0], $textColour[1], $textColour[2] );
 $pdf->SetFont( 'Arial', '', 15 );
 $pdf->FancyTable($header,$data);

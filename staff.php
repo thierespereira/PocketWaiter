@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Delivery</title>
+        <title>Staff</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
         <script src="js/jquery-1.11.1.min.js"></script>
@@ -22,7 +22,7 @@
                     }
 
 
-                    if($_SESSION['user_type']  != 'delivery') {
+                    if($_SESSION['user_type']  != 'staff') {
                         echo '<script>window.location = "index.php" </script>';
                         die;
                     }
