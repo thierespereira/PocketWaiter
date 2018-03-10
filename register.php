@@ -136,7 +136,7 @@
                         $error = 'The email is already registered in the system!<br>';
                         $error .= 'Please enter a different email!';
                     } else {
-                        $sql = "insert into `pwdb`.`user` (`email`, `password`, `salt`, `type`, `phone_number`, `address`) values (?, ?, ?, ?, ?, ?);";
+                        $sql = "insert into `pocketwaiter`.`user` (`email`, `password`, `salt`, `type`, `phone_number`, `address`) values (?, ?, ?, ?, ?, ?);";
                         $sth = $DBH->prepare($sql);
                         $type = 'customer';
 

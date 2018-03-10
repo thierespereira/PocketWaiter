@@ -44,7 +44,7 @@
                             } else {
                                 if(isset($_POST['confirm'])) {
                                     try {
-                                        $sql = "insert into `pwdb`.`order` (`user_id`, `total`, `date_time_of_creation`, `status`) values ('" . $_SESSION['user_id'] . "', '0.00', Now(), 'Open');";
+                                        $sql = "insert into `pocketwaiter`.`order` (`user_id`, `total`, `date_time_of_creation`, `status`) values ('" . $_SESSION['user_id'] . "', '0.00', Now(), 'Open');";
 
                                         $sth = $DBH->prepare($sql);
 
@@ -67,14 +67,14 @@
                                             if ($sth->rowCount() > 0) {
                                                 $rec = $sth->fetch(PDO::FETCH_ASSOC);
                                                 $total = $total + $rec['price'];
-                                                $sql2 = "insert into `pwdb`.`order_items` (`order_id`, `item`, `product_id`) values ('" . $OrderId . "', '" .  $item . "', '" . $value . "');";
+                                                $sql2 = "insert into `pocketwaiter`.`order_items` (`order_id`, `item`, `product_id`) values ('" . $OrderId . "', '" .  $item . "', '" . $value . "');";
                                                 $sth2 = $DBH->prepare($sql2);
                                                 $sth2->execute();
                                                 $item = $item + 1;
                                             }
                                         }
 
-                                        $sql = "update `pwdb`.`order` set `total`='" . $total ."' where  `id`=" . $OrderId . ";";
+                                        $sql = "update `pocketwaiter`.`order` set `total`='" . $total ."' where  `id`=" . $OrderId . ";";
 
                                         $sth = $DBH->prepare($sql);
                                         $sth->execute();

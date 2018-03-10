@@ -40,15 +40,7 @@
 
                     // DB
                     try {
-                        $DB_TYPE = 'mysql'; //Type of database
-                        $DB_HOST = 'localhost'; //Host name
-                        $DB_USER = 'root'; //Host Username
-                        $DB_PASS = ''; //Host Password
-                        $DB_NAME = 'pwdb'; //Database name
-
-                        $connStr = "mysql:host=".$DB_HOST.";port=3306;dbname=".$DB_NAME;
-                        $DBH = new PDO($connStr,$DB_USER,$DB_PASS);
-
+                        include('database.php');
 
                         $sql = "select * from user";
                         $sth = $DBH->prepare($sql);
