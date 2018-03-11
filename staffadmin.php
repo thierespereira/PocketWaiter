@@ -29,6 +29,7 @@
             ?>
 
             <div role="main" class="ui-content">
+                <a href="register.php" data-transition="slide" class="ui-btn ui-btn-b ui-shadow">Create New User</a>
                 <a href="add_product.php" class="ui-btn ui-icon-plus ui-btn-icon-left ui-btn-b ui-shadow">Add a new Product</a>
                 <a href="edit_user.php" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b">Edit My Profile</a>
                 <?php

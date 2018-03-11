@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="css/mycss.css" />
 <div data-role="header">
     <center>
         <p><img src="images/pw_logo.png"></p>

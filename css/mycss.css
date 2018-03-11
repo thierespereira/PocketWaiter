@@ -1,0 +1,4 @@
+tbody tr:nth-child(odd){
+    background-color: dimgray;
+    color: white;
+}

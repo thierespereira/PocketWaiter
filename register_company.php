@@ -76,45 +76,44 @@
     </head>
     <body>
         <div data-role="page" style="width=100%; margin:0;" data-theme="b">
+
+            <?php
+                if(!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
+                    echo '<script>window.location = "index.php" </script>';
+                    die;
+                }
+            ?>
+
             <?php
                 include('header.php');
             ?>
         <?php
 
         if($_POST) {
+            $name = $_POST['name'];
             $email = $_POST['email'];
-            $password = $_POST['password'];
-            $rePassword = $_POST['rePassword'];
+            $desc = $_POST['desc'];
+            $website = $_POST['website'];
             $phone = $_POST['phone'];
             $address = $_POST['address'];
             $error = '';
 
+            if($name == '') {
+                $error .= 'You must enter a name for the company!<br>';
+            }
+
             if($email == '') {
                  $error .= 'You must enter an email address!<br>';
-            }
-            else {
+            } else {
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     $error .= "Not a valid email address!<br>";
-                }
-            }
-
-            if($password == '') {
-                $error .= 'You must enter a password!<br>';
-            }
-
-            if($rePassword == '') {
-                $error .= 'You must fill in "re-enter password" field!<br>';
-            }
-
-            if(($password != '') && ($rePassword != '')) {
-                if($password != $rePassword) {
-                    $error .= 'The password is not a match!';
                 }
             }
 
             if($phone == '') {
                 $error .= 'You must enter a phone number!<br>';
             }
+
             if($address == '') {
                 $error .= 'You must enter an address!<br>';
             }
@@ -124,35 +123,17 @@
                 try {
                     include('database.php');
 
-                    $sql = "select email from user where email = ?";
+                    $sql = "insert into `pocketwaiter`.`company` (`name`, `email`, `desc`, `website`, `phone`, `address`) values (?, ?, ?, ?, ?, ?);";
                     $sth = $DBH->prepare($sql);
 
-                    $sth->bindParam(1,$email, PDO::PARAM_INT);
-
+                    $sth->bindParam(1, $name, PDO::PARAM_INT);
+                    $sth->bindParam(2, $email, PDO::PARAM_INT);
+                    $sth->bindParam(3, $desc, PDO::PARAM_INT);
+                    $sth->bindParam(4, $website, PDO::PARAM_INT);
+                    $sth->bindParam(5, $phone, PDO::PARAM_INT);
+                    $sth->bindParam(6, $address, PDO::PARAM_INT);
 
                     $sth->execute();
-
-                    if ($sth->rowCount() > 0) {
-                        $error = 'The email is already registered in the system!<br>';
-                        $error .= 'Please enter a different email!';
-                    } else {
-                        $sql = "insert into `pocketwaiter`.`user` (`email`, `password`, `salt`, `type`, `phone_number`, `address`) values (?, ?, ?, ?, ?, ?);";
-                        $sth = $DBH->prepare($sql);
-                        $type = 'customer';
-
-                        $salt = 'thisisntasalt';
-                        $passwordHashed = md5($password . $salt);
-
-                        $sth->bindParam(1, $email, PDO::PARAM_INT);
-                        $sth->bindParam(2, $passwordHashed, PDO::PARAM_INT);
-                        $sth->bindParam(3, $salt, PDO::PARAM_INT);
-                        $sth->bindParam(4, $type, PDO::PARAM_INT);
-                        $sth->bindParam(5, $phone, PDO::PARAM_INT);
-                        $sth->bindParam(6, $address, PDO::PARAM_INT);
-
-                        $sth->execute();
-
-                    }
                 } catch(PDOException $e) {
                     echo $e;
                     die;
@@ -172,48 +153,27 @@
                                 echo '<br>';
                                 echo '</div><br>';
                             } else {
-                                echo '<script>window.location = "index.php" </script>';
+                                echo '<script>window.location = "administrator.php" </script>';
                             }
                         }
                     ?>
 
-                <form action="register.php" method="post" onsubmit="return validateMyForm(this);">
-                    <label for="text-1">Email:</label>
+                <form action="register_company.php" method="post" onsubmit="return validateMyForm(this);">
+                    <label for="name">Name:</label>
+                    <input type="text" data-clear-btn="true" name="name" id="name" value="<?php echo isset($_POST['name']) ? $_POST['name'] : '' ?>">
+                    <label for="email">Email:</label>
                     <input type="text" data-clear-btn="true" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
-                    <label for="text-3">Password:</label>
-                    <input type="password" data-clear-btn="true" name="password" id="password" value="<?php echo isset($_POST['password']) ? $_POST['password'] : '' ?>" autocomplete="off">
-                    <label for="text-3">Re-enter password:</label>
-                    <input type="password" data-clear-btn="true" name="rePassword" id="rePassword" value="<?php echo isset($_POST['rePassword']) ? $_POST['rePassword'] : '' ?>" autocomplete="off">
-                    <label for="text-1">Phone number:</label>
+                    <label for="desc">Description:</label>
+                    <input type="text" data-clear-btn="true" name="desc" id="desc" value="<?php echo isset($_POST['desc']) ? $_POST['desc'] : '' ?>">
+                    <label for="website">Website:</label>
+                    <input type="text" data-clear-btn="true" name="website" id="website" value="<?php echo isset($_POST['website']) ? $_POST['website'] : '' ?>">
+                    <label for="phone">Phone number:</label>
                     <input type="text" data-clear-btn="true" name="phone" id="phone" value="<?php echo isset($_POST['phone']) ? $_POST['phone'] : '' ?>">
-                    <label for="textarea">Address:</label>
+                    <label for="address">Address:</label>
                     <textarea name="address" id="address"><?php echo isset($_POST['address']) ? $_POST['address'] : '' ?></textarea>
 
-                    <?php
-                        if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') {
-                            echo '<div class="ui-field-contain">';
-                                    echo '<label for="user_type">Account Type:</label>';
-                                    echo '<select id="user_type" name="user_type">';
-                                    echo '<option value="customer"' . ($type == 'customer' ? 'selected="selected"' : '' ) .'>Customer</option>';
-                                    echo '<option value="admin"' . ($type == 'admin' ? 'selected="selected"' : '' ) . '>Administrator</option>';
-                                    echo '<option value="adminstaff"' . ($type == 'adminstaff' ? 'selected="selected"' : '' ) . '>Staff Member</option>';
-                                    echo '<option value="staff"' . ($type == 'staff' ? 'selected="selected"' : '' ) .'>Staff</option>';
-                                echo '</select>';
-                            echo '</div>';
-                        }
-                     ?>
-
                     <button type="submit" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Register</button>
-
-                    <?php
-                        if(!isset($_SESSION['user_type'])) {
-                            echo '<a href="index.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
-                        } else if($_SESSION['user_type']  == 'admin') {
-                            echo '<a href="administrator.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
-                        } else {
-                            echo '<a href="index.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
-                        }
-                    ?>
+                    <a href="administrator.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
                 </form>
             </div><!-- /content -->
 
