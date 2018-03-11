@@ -35,7 +35,6 @@
                         //Create db connection
                         include('database.php');
 
-
                         $sql = "select * from product";
                         $sth = $DBH->prepare($sql);
 
@@ -54,8 +53,6 @@
                         $error .= $e;
                         echo $e;
                     }
-
-
                 ?>
             </div><!-- /content -->
             <div>

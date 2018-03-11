@@ -20,7 +20,7 @@
                     $("#errorMessage").append('You must enter an email!<br>');
                     ret = false;
                 } else {
-                    if (!re_mail.test(email.value.trim())) {
+                    if (!re_mail.test(form.email.value.trim())) {
                         $("#errorMessage").append('Not a valid email address!<br>');
                         ret = false;
                     } else {
@@ -87,6 +87,11 @@
             $rePassword = $_POST['rePassword'];
             $phone = $_POST['phone'];
             $address = $_POST['address'];
+            $comp_id = $_POST['comp_id'];
+            if($comp_id == ''){
+                $comp_id = null;
+            }
+            $type = $_POST['type'];
             $error = '';
 
             if($email == '') {
@@ -136,9 +141,8 @@
                         $error = 'The email is already registered in the system!<br>';
                         $error .= 'Please enter a different email!';
                     } else {
-                        $sql = "insert into `pocketwaiter`.`user` (`email`, `password`, `salt`, `type`, `phone_number`, `address`) values (?, ?, ?, ?, ?, ?);";
+                        $sql = "insert into `pocketwaiter`.`user` (`email`, `password`, `salt`, `type`, `phone_number`, `address`, `comp_id`) values (?, ?, ?, ?, ?, ?, ?);";
                         $sth = $DBH->prepare($sql);
-                        $type = 'customer';
 
                         $salt = 'thisisntasalt';
                         $passwordHashed = md5($password . $salt);
@@ -149,6 +153,7 @@
                         $sth->bindParam(4, $type, PDO::PARAM_INT);
                         $sth->bindParam(5, $phone, PDO::PARAM_INT);
                         $sth->bindParam(6, $address, PDO::PARAM_INT);
+                        $sth->bindParam(7, $comp_id, PDO::PARAM_INT);
 
                         $sth->execute();
 
@@ -172,7 +177,11 @@
                                 echo '<br>';
                                 echo '</div><br>';
                             } else {
-                                echo '<script>window.location = "index.php" </script>';
+                                if($_SESSION['user_type'] == 'admin') {
+                                    echo '<script>window.location = "administrator.php" </script>';
+                                } else {
+                                    echo '<script>window.location = "index.php" </script>';
+                                }
                             }
                         }
                     ?>
@@ -192,14 +201,41 @@
                     <?php
                         if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') {
                             echo '<div class="ui-field-contain">';
-                                    echo '<label for="user_type">Account Type:</label>';
-                                    echo '<select id="user_type" name="user_type">';
+                                    echo '<label for="type">Account Type:</label>';
+                                    echo '<select id="type" name="type">';
                                     echo '<option value="customer"' . ($type == 'customer' ? 'selected="selected"' : '' ) .'>Customer</option>';
                                     echo '<option value="admin"' . ($type == 'admin' ? 'selected="selected"' : '' ) . '>Administrator</option>';
                                     echo '<option value="adminstaff"' . ($type == 'adminstaff' ? 'selected="selected"' : '' ) . '>Staff Member</option>';
                                     echo '<option value="staff"' . ($type == 'staff' ? 'selected="selected"' : '' ) .'>Staff</option>';
                                 echo '</select>';
                             echo '</div>';
+
+                                try {
+                                    //Create db connection
+                                    include('database.php');
+
+                                    $sql = "select id, name from company";
+                                    $sth = $DBH->prepare($sql);
+
+                                    $sth->execute();
+
+                                    if ($sth->rowCount() > 0) {
+                                        echo '<div class="ui-field-contain">';
+                                            echo '<label for="comp_id">Company:</label>';
+                                            echo '<select id="comp_id" name="comp_id">';
+                                                echo '<option value="">Not Applicable</option>';
+                                            while ($row = $sth->fetch(PDO::FETCH_ASSOC))  {
+                                                echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
+                                            }
+                                            echo '</select>';
+                                        echo '</div>';
+                                    } else {
+                                        $error = 'No companies registered.';
+                                    }
+                                } catch(PDOException $e) {
+                                    $error .= $e;
+                                    echo $e;
+                                }
                         }
                      ?>
 

@@ -177,16 +177,41 @@
                                     echo '<label for="address">Address:</label>';
                                     echo '<textarea name="address" id="address">' . $address . '</textarea>';
 
-                                    echo '<div class="ui-field-contain">';
-                                        if($_SESSION['user_type'] == 'admin') {
-                                        echo '<label for="user_type">Account Type:</label>';
-                                        echo '<select id="user_type" name="user_type">';
-                                            echo '<option value="customer"' . ($type == 'customer' ? 'selected="selected"' : '' ) .'>Customer</option>';
-                                            echo '<option value="admin"' . ($type == 'admin' ? 'selected="selected"' : '' ) . '>Administrator</option>';
-                                            echo '<option value="staff"' . ($type == 'staff' ? 'selected="selected"' : '' ) . '>Staff Member</option>';
-                                            echo '<option value="staff"' . ($type == 'staff' ? 'selected="selected"' : '' ) .'>staff Department</option>';
-                                        echo '</select>';
-                                    echo '</div>';
+                                    if($_SESSION['user_type'] == 'admin') {
+                                        echo '<div class="ui-field-contain">';
+                                            echo '<label for="user_type">Account Type:</label>';
+                                            echo '<select id="user_type" name="user_type">';
+                                                echo '<option value="customer"' . ($type == 'customer' ? 'selected="selected"' : '' ) .'>Customer</option>';
+                                                echo '<option value="admin"' . ($type == 'admin' ? 'selected="selected"' : '' ) . '>Administrator</option>';
+                                                echo '<option value="staff"' . ($type == 'staff' ? 'selected="selected"' : '' ) . '>Staff Member</option>';
+                                                echo '<option value="staff"' . ($type == 'staff' ? 'selected="selected"' : '' ) .'>staff Department</option>';
+                                            echo '</select>';
+                                        echo '</div>';
+
+                                        include('database.php');
+
+                                        $sql = "select id, name from company";
+                                        $sth = $DBH->prepare($sql);
+
+                                        $sth->execute();
+
+                                        if ($sth->rowCount() > 0) {
+                                            echo '<div class="ui-field-contain">';
+                                                echo '<label for="company_id">Company:</label>';
+                                                echo '<select id="company_id" name="company_id">';
+                                                    echo '<option value="">Not Applicable</option>';
+                                                    while ($row = $sth->fetch(PDO::FETCH_ASSOC))  {
+                                                        echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
+                                                    }
+                                                echo '</select>';
+                                            echo '</div>';
+                                        } else {
+                                            $error = 'No companies registered.';
+                                        }
+                                    } catch(PDOException $e) {
+                                        $error .= $e;
+                                        echo $e;
+                                    }
                                     }
 
                                     if($_SESSION['user_type'] == 'admin') {
@@ -197,7 +222,6 @@
                                     } else {
                                         echo '<a href="change_password.php" class="ui-btn ui-icon-edit ui-btn-icon-left ui-btn-b">Change Password</a>';
                                     }
-
                                     echo '<button type="submit" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>';
 
                                     if($_SESSION['user_type']  == 'admin') {
@@ -205,7 +229,6 @@
                                     } else {
                                         echo '<a href="customer.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
                                     }
-
                                     echo '</form>';
                                 }
                             } else {
