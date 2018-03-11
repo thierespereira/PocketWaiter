@@ -46,7 +46,7 @@
 
                         echo '<br>';
                         echo '<br>';
-                        
+
                         $sql = "select * from user";
                         $sth = $DBH->prepare($sql);
 
@@ -102,7 +102,7 @@
                             echo '<tbody>';
 
                             while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-                                echo '<tr class="row" onclick="location.href=\'edit_user.php?id=' . $row['id'] . '\'">';
+                                echo '<tr class="row" onclick="location.href=\'edit_company.php?id=' . $row['id'] . '\'">';
                                 echo '<th>' . $row['id'] . '</th>';
                                 echo '<td>' . $row['name']. '</td>';
                                 echo '<td>' . $row['desc'] . '</td>';
