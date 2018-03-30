@@ -208,10 +208,6 @@
                                         } else {
                                             $error = 'No companies registered.';
                                         }
-                                    } catch(PDOException $e) {
-                                        $error .= $e;
-                                        echo $e;
-                                    }
                                     }
 
                                     if($_SESSION['user_type'] == 'admin') {
