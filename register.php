@@ -87,11 +87,18 @@
             $rePassword = $_POST['rePassword'];
             $phone = $_POST['phone'];
             $address = $_POST['address'];
-            $comp_id = $_POST['comp_id'];
+            $comp_id = '';
+            if(isset($_POST['comp_id'])) {
+                $comp_id = $_POST['comp_id'];
+            }
             if($comp_id == ''){
                 $comp_id = null;
             }
-            $type = $_POST['type'];
+            $type = 'customer';
+            if(isset($_POST['type'])) {
+                $type = $_POST['type'];
+            }
+
             $error = '';
 
             if($email == '') {
@@ -177,7 +184,7 @@
                                 echo '<br>';
                                 echo '</div><br>';
                             } else {
-                                if($_SESSION['user_type'] == 'admin') {
+                                if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') {
                                     echo '<script>window.location = "administrator.php" </script>';
                                 } else {
                                     echo '<script>window.location = "index.php" </script>';
@@ -186,7 +193,7 @@
                         }
                     ?>
 
-                <form action="register.php" method="post" onsubmit="return validateMyForm(this);">
+                <form action="register.php" method="post" onsubmit="">
                     <label for="text-1">Email:</label>
                     <input type="text" data-clear-btn="true" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
                     <label for="text-3">Password:</label>

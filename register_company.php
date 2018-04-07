@@ -79,7 +79,7 @@
 
             <?php
                 if(!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
-                    echo '<script>window.location = "index.php" </script>';
+                    // echo '<script>window.location = "index.php" </script>';
                     die;
                 }
             ?>
@@ -153,7 +153,7 @@
                                 echo '<br>';
                                 echo '</div><br>';
                             } else {
-                                echo '<script>window.location = "administrator.php" </script>';
+                                // echo '<script>window.location = "administrator.php" </script>';
                             }
                         }
                     ?>
