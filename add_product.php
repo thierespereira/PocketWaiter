@@ -67,7 +67,7 @@
                     }
 
 
-                    if($_SESSION['user_type']  != 'staff') {
+                    if($_SESSION['user_type']  != 'staffadmin') {
                         echo '<script>window.location = "index.php" </script>';
                         die;
                     }
@@ -122,7 +122,7 @@
                             echo '</div><br>';
                         }
 
-                        if(!empty($registered)) {
+                        if(empty($registered)) {
                             echo '<div id="message" style="background-color:lightgreen;">';
                             echo 'Product added successfully.<br>';
                             echo 'Please click <a href="staffadmin.php">here</a> to view a list of products.';

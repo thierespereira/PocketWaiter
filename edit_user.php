@@ -59,7 +59,7 @@
                         die;
                     }
 
-                    if($_SESSION['user_type'] == 'customer' || $_SESSION['user_type'] == 'staff' ) {
+                    if($_SESSION['user_type'] == 'customer' || $_SESSION['user_type'] == 'staffadmin' ) {
                         $user_id = $_SESSION['user_id'];
                     } else {
                         if($_SESSION['user_type']  == 'admin') {
@@ -222,6 +222,8 @@
 
                                     if($_SESSION['user_type']  == 'admin') {
                                         echo '<a href="administrator.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                                    } else if($_SESSION['user_type']  == 'staffadmin') {
+                                        echo '<a href="staffadmin.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
                                     } else {
                                         echo '<a href="customer.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
                                     }

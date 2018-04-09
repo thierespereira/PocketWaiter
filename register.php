@@ -194,13 +194,13 @@
                     ?>
 
                 <form action="register.php" method="post" onsubmit="">
-                    <label for="text-1">Email:</label>
+                    <label for="email">Email:</label>
                     <input type="text" data-clear-btn="true" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
-                    <label for="text-3">Password:</label>
+                    <label for="password">Password:</label>
                     <input type="password" data-clear-btn="true" name="password" id="password" value="<?php echo isset($_POST['password']) ? $_POST['password'] : '' ?>" autocomplete="off">
-                    <label for="text-3">Re-enter password:</label>
+                    <label for="rePassword">Re-enter password:</label>
                     <input type="password" data-clear-btn="true" name="rePassword" id="rePassword" value="<?php echo isset($_POST['rePassword']) ? $_POST['rePassword'] : '' ?>" autocomplete="off">
-                    <label for="text-1">Phone number:</label>
+                    <label for="phone">Phone number:</label>
                     <input type="text" data-clear-btn="true" name="phone" id="phone" value="<?php echo isset($_POST['phone']) ? $_POST['phone'] : '' ?>">
                     <label for="textarea">Address:</label>
                     <textarea name="address" id="address"><?php echo isset($_POST['address']) ? $_POST['address'] : '' ?></textarea>

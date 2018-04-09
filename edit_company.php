@@ -66,7 +66,7 @@
                         die;
                     }
 
-                    if($_SESSION['user_type'] == 'customer' || $_SESSION['user_type'] == 'staff' ) {
+                    if($_SESSION['user_type'] == 'customer' || $_SESSION['user_type'] == 'staffadmin' ) {
                         $user_id = $_SESSION['user_id'];
                     } else {
                         if($_SESSION['user_type']  == 'admin') {

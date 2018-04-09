@@ -22,7 +22,7 @@
                     }
 
 
-                    if($_SESSION['user_type']  != 'staff') {
+                    if($_SESSION['user_type']  != 'kitchen') {
                         echo '<script>window.location = "index.php" </script>';
                         die;
                     }
@@ -30,7 +30,7 @@
                     try {
                         include('database.php');
 
-                        $sql = 'select * from `order` order by date_time_of_creation;';
+                        $sql = 'select * from `order` where status = "Being Prepared" order by date_time_of_creation;';
                         $sth = $DBH->prepare($sql);
                         $sth->execute();
 
@@ -38,18 +38,18 @@
                             echo '<ul data-role="listview" data-inset="true">';
                             while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 
-                                echo '  <li><a href="edit_order.php?id=' . $row['id'] . '"> Nº: ' . $row['id'] . ' <br> Created on: ' . $row['date_time_of_creation'] .' <br> Status: ' . $row['status'] . '</a></li>';
+                                echo '  <li><a href="edit_orders_on.php?id=' . $row['id'] . '"> Nº: ' . $row['id'] . ' <br> Created on: ' . $row['date_time_of_creation'] .' <br> Status: ' . $row['status'] . ' <br> Table No.: ' . $row['table_id'] . '</a></li>';
 
                             }
                             echo '</ul>';
                         } else {
-                            echo '<center>There are no open Orders.</center>';
+                            echo '<center>There are no orders being prepared.</center>';
                         }
 
                     } catch(PDOException $e) {
 
                     }
-                echo '<form action="index.php" method="post"><button type="submit" id="hLogout" name="hLogout" class="ui-btn ui-icon-power ui-btn-icon-left ui-btn-b">Log out</button></form>';
+                echo '<a href="kitchen.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
                 ?>
 
             </div><!-- /content -->

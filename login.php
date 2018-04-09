@@ -104,8 +104,8 @@
                                 } else if($type == 'admin') {
                                     echo '<script>window.location = "administrator.php" </script>';
                                     die;
-                                } else if($type == 'staff') {
-                                    echo '<script>window.location = "staff.php" </script>';
+                                } else if($type == 'kitchen') {
+                                    echo '<script>window.location = "kitchen.php" </script>';
                                     die;
                                 }
                             } else {
@@ -142,9 +142,9 @@
                     }
                 ?>
                 <form action="login.php" method="post" onsubmit="return validateMyForm(this);">
-                    <label for="text-1">E-mail:</label>
+                    <label for="email">E-mail:</label>
                     <input type="text" data-clear-btn="true" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
-                    <label for="text-3">Password:</label>
+                    <label for="password">Password:</label>
                     <input type="password" data-clear-btn="true" name="password" id="password" value="" autocomplete="off">  <br>
                     <!--
                     <center>

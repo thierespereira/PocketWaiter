@@ -79,7 +79,7 @@
 
             <?php
                 if(!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
-                    // echo '<script>window.location = "index.php" </script>';
+                    echo '<script>window.location = "index.php" </script>';
                     die;
                 }
             ?>
@@ -123,6 +123,18 @@
                 try {
                     include('database.php');
 
+                    $sql = "select email from company where email = ?";
+                    $sth = $DBH->prepare($sql);
+
+                    $sth->bindParam(1,$email, PDO::PARAM_INT);
+
+
+                    $sth->execute();
+
+                    if ($sth->rowCount() > 0) {
+                        $error = 'The email is already registered in the system!<br>';
+                        $error .= 'Please enter a different email!';
+                    } else {
                     $sql = "insert into `pocketwaiter`.`company` (`name`, `email`, `desc`, `website`, `phone`, `address`) values (?, ?, ?, ?, ?, ?);";
                     $sth = $DBH->prepare($sql);
 
@@ -132,8 +144,10 @@
                     $sth->bindParam(4, $website, PDO::PARAM_INT);
                     $sth->bindParam(5, $phone, PDO::PARAM_INT);
                     $sth->bindParam(6, $address, PDO::PARAM_INT);
+                    $sth->bindParam(7, $logo, PDO::PARAM_INT);
 
                     $sth->execute();
+                }
                 } catch(PDOException $e) {
                     echo $e;
                     die;
@@ -153,7 +167,7 @@
                                 echo '<br>';
                                 echo '</div><br>';
                             } else {
-                                // echo '<script>window.location = "administrator.php" </script>';
+                                echo '<script>window.location = "administrator.php" </script>';
                             }
                         }
                     ?>
@@ -171,7 +185,10 @@
                     <input type="text" data-clear-btn="true" name="phone" id="phone" value="<?php echo isset($_POST['phone']) ? $_POST['phone'] : '' ?>">
                     <label for="address">Address:</label>
                     <textarea name="address" id="address"><?php echo isset($_POST['address']) ? $_POST['address'] : '' ?></textarea>
-
+                    <!--
+                    <label for="phone">Logo:</label>
+                    <input type="file" data-clear-btn="true" name="logo" id="logo" value="<?php echo isset($_POST['logo']) ? $_POST['logo'] : '' ?>">
+                    -->
                     <button type="submit" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Register</button>
                     <a href="administrator.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
                 </form>

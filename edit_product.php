@@ -68,7 +68,7 @@
                     }
 
 
-                    if($_SESSION['user_type']  != 'staff') {
+                    if($_SESSION['user_type']  != 'staffadmin') {
                         echo '<script>window.location = "index.php" </script>';
                         die;
                     }

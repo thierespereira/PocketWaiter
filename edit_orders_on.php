@@ -36,11 +36,12 @@
 
                     if($_POST) {
                         if(isset($_POST['update_status'])) {
-                            $sql = 'update `order` set `status`= "Being Prepared" where  `id` = ?;';
+                            $sql = 'update `order` set `status`= "Ready" where  `id` = ?;';
                             $sth = $DBH->prepare($sql);
                             $sth->bindParam(1, $_GET['id'], PDO::PARAM_INT);
                             $sth->execute();
                         } else if(isset($_POST['printPDF'])) {
+
                             echo '<script>window.location = "print_order.php?id=' . $_GET['id'] . '"</script>';
                             die;
                         }
@@ -50,7 +51,6 @@
 
                     $sth = $DBH->prepare($sql);
                     $sth->bindParam(1,$_GET['id'], PDO::PARAM_INT);
-
                     $sth->execute();
 
                     if ($sth->rowCount() > 0) {
@@ -75,9 +75,10 @@
                     $error .= $e;
                 }
 
-                echo '<form action="edit_order.php?id=' . $_GET['id'] . '" method="post">';
-                if($status == 'Open') {
-                    echo '<center><button id="update_status" name="update_status" class="ui-btn ui-icon-tag ui-btn-icon-left ui-btn-b">Mark as "Being Prepared..."</button></center>';
+                echo '<form action="edit_orders_on.php?id=' . $_GET['id'] . '" method="post">';
+                if($status == 'Being Prepared') {
+                    echo '<center><button id="update_status" name="update_status" class="ui-btn ui-icon-tag ui-btn-icon-left ui-btn-b">Mark as "Ready!"</button></center>';
+                    echo '<a href="print_order.php?id=' . $_GET['id'] . '" target="_blank" class="ui-btn ui-icon-action ui-btn-icon-left ui-btn-b">Print Receipt</a>';
                 } else {
                     echo '<a href="print_order.php?id=' . $_GET['id'] . '" target="_blank" class="ui-btn ui-icon-action ui-btn-icon-left ui-btn-b">Print Receipt</a>';
                 }

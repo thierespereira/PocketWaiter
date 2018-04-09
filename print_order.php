@@ -26,7 +26,7 @@ class PDF extends FPDF {
 	// Page header
 function Header() {
     // Logo
-    $this->Image('images/b_logo.png',85,10,45);
+    $this->Image('images/your_logo_here.jpg',85,10,45);
     // Arial bold 15
     $this->SetFont('Arial','B',15);
     // Move to the right
@@ -44,7 +44,7 @@ function LoadData($file) {
         $sqlItems = "select * from order_items inner join product on product.id = order_items.product_id where order_items.order_id = " . $_GET['id'] . ';';
         $sthItems = $DBH->prepare($sqlItems);
         $sthItems->execute();
-        if($sthItems->rowCount() > 0) {                                
+        if($sthItems->rowCount() > 0) {
             while($item = $sthItems->fetch(PDO::FETCH_ASSOC)) {
                 $line = $item['id'] . ';' . $item['name'] . ';' . $item['price'];
                 $data[] = explode(';',trim($line));
@@ -117,7 +117,7 @@ $pdf->AddPage();
 $pdf->SetTextColor( $textColour[0], $textColour[1], $textColour[2] );
 $pdf->SetFont( 'Arial', 'B', 20);
 $pdf->Line(10, 65, 210-20, 65);
-$pdf->Write( 60, "                               PACKAGING SLIP");
+$pdf->Write( 60, "                         RECEIPT OF PURCHASE");
 $pdf->Line(10, 85, 210-20, 85);
 $pdf->Ln( 20 );
 $pdf->SetTextColor( $textColour[0], $textColour[1], $textColour[2] );
@@ -133,12 +133,11 @@ $pdf->Write( 46, "Customer: " . $customer);
 $pdf->Ln( 6 );
 $pdf->Write( 46, "Phone number: " . $phone);
 $pdf->Ln( 6 );
-$pdf->Write( 46, "staff Address: " . $address);
 $pdf->SetTextColor( $textColour[0], $textColour[1], $textColour[2] );
 $pdf->SetFont( 'Arial', '', 15 );
 $pdf->FancyTable($header,$data);
 $pdf->SetTextColor( $textColour[0], $textColour[1], $textColour[2] );
 $pdf->SetFont( 'Arial', 'B', 15 );
-$pdf->Write(6, 'Customer Signature: ');
+$pdf->Write(16, 'Thank you very much and come back again!');
 $pdf->Output('I','Order_' . $_GET['id'] . '.pdf');
 ?>
