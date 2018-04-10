@@ -29,7 +29,7 @@
                     try {
                         //Create db connection
                         include('database.php');
-                        
+
                         $comp_id = $_SESSION['comp_id'];
 
                         $sql = "select * from comptable where comp_id = ?";

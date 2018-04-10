@@ -149,10 +149,10 @@
                         }
                     } else {
                         if(isset($_GET['id'])) {
-                            $sql = "select * from product where comp_id = ?";
+                            $sql = "select * from product where id = ?";
 
                             $sth = $DBH->prepare($sql);
-                            $sth->bindParam(1,$_SESSION['comp_id'], PDO::PARAM_INT);
+                            $sth->bindParam(1,$_GET['id'], PDO::PARAM_INT);
                             $sth->execute();
 
                             if ($sth->rowCount() > 0) {
