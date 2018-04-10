@@ -24,7 +24,7 @@
 
             <div role="main" class="ui-content">
                 <a href="add_table.php" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b">Add Table</a>
-                <a href="manage_table.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
+                <a href="staffadmin.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
                 <?php
                     try {
                         //Create db connection
@@ -52,8 +52,7 @@
                         $error .= $e;
                         echo $e;
                     }
-                ?>
-                <form action="index.php" method="post"><button type="submit" id="hLogout" name="hLogout" class="ui-btn ui-icon-power ui-btn-icon-left ui-btn-b">Log out</button></form>
+                ?>                
             </div><!-- /content -->
 
             <div data-role="footer">

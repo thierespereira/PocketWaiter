@@ -163,7 +163,6 @@
                         $sth->bindParam(7, $comp_id, PDO::PARAM_INT);
 
                         $sth->execute();
-
                     }
                 } catch(PDOException $e) {
                     echo $e;
