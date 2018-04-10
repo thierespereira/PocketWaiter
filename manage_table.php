@@ -42,7 +42,7 @@
                         if ($sth->rowCount() > 0) {
                             echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search tables..." data-inset="true"> ';
                             while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-                                echo '<li data-icon="edit"><a href="edit_table.php?id=' . $row['id'] . '">' .  $row['code'] . '</a></li>';
+                                echo '<li data-icon="edit">' .  $row['code'] . '</li>';
                             }
                             echo '</ul>';
                         } else {
@@ -52,8 +52,7 @@
                         $error .= $e;
                         echo $e;
                     }
-                ?>
-                <form action="index.php" method="post"><button type="submit" id="hLogout" name="hLogout" class="ui-btn ui-icon-power ui-btn-icon-left ui-btn-b">Log out</button></form>
+                ?>                
             </div><!-- /content -->
 
             <div data-role="footer">
