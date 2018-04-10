@@ -16,22 +16,17 @@
             <?php
                 include('header.php');
 
-                if(!isset($_SESSION['user_type'])) {
+                if(!isset($_SESSION['user_type']) || ($_SESSION['user_type']  != 'staffadmin')) {
                     echo '<script>window.location = "index.php" </script>';
                     die;
                 }
 
-
-                if($_SESSION['user_type']  != 'staffadmin') {
-                    echo '<script>window.location = "index.php" </script>';
-                    die;
-                }
             ?>
 
             <div role="main" class="ui-content">
                 <a href="register.php" data-transition="slide" class="ui-btn ui-icon-plus ui-btn-icon-left ui-btn-b ui-shadow">Create New User</a>
-                <a href="add_product.php" class="ui-btn ui-icon-plus ui-btn-icon-left ui-btn-b ui-shadow">Add a new Product</a>
-                <a href="edit_user.php" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b">Edit My Profile</a>
+                <a href="manage_product.php" data-transition="slide" class="ui-btn ui-icon-plus ui-btn-icon-left ui-btn-b ui-shadow">Manage Products</a>
+                <a href="edit_user.php" data-transition="slide" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b">Edit My Profile</a>
                 <?php
                     try {
                         //Create db connection
@@ -56,7 +51,7 @@
                         echo $e;
                     }
                 ?>
-                <form action="index.php" method="post"><button type="submit" id="hLogout" name="hLogout" class="ui-btn ui-icon-power ui-btn-icon-left ui-btn-b">Log out</button></form>
+                <form action="index.php" method="post"><button type="submit" id="hLogout" name="hLogout" data-transition="slide" class="ui-btn ui-icon-power ui-btn-icon-left ui-btn-b">Log out</button></form>
             </div><!-- /content -->
 
             <div data-role="footer">

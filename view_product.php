@@ -63,7 +63,7 @@
                             echo $rec['description'] . '</center></p>';
                             echo '<p></p>';
                             echo '<form action="view_product.php?id=' . $productId .'" method="post">';
-                            echo '<center><button type="submit" id="purchase" name="purchase" class="ui-btn ui-icon-shop ui-btn-icon-left ui-shadow orange">Add to Cart</button></center>';
+                            echo '<center><button type="submit" id="purchase" name="purchase" data-transition="slide" class="ui-btn ui-icon-shop ui-btn-icon-left ui-shadow orange">Add to Cart</button></center>';
                             echo '</form>';
                         }
                     }
@@ -75,7 +75,7 @@
                 </div>
             </div><!-- /content -->
             <div>
-                <a href="products.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b ui-shadow">Return</a>
+                <a href="products.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b ui-shadow">Return</a>
             </div>
             <div data-role="footer">
                 <center><h5 style="color:#B0B0B0;">This web application was developed by PVP.</h5></center>

@@ -119,7 +119,7 @@
                         $error .= $e;
                         echo $e;
                     }
-                    echo '<form action="index.php" method="post"><button type="submit" id="hLogout" name="hLogout" class="ui-btn ui-icon-power ui-btn-icon-left ui-btn-b">Log out</button></form>';
+                    echo '<form action="index.php" method="post"><button type="submit" data-transition="slide"  id="hLogout" name="hLogout" class="ui-btn ui-icon-power ui-btn-icon-left ui-btn-b">Log out</button></form>';
 
 
                 ?>

@@ -133,7 +133,7 @@
                                 echo '</tr>';
                             echo '</tbody>';
                             echo '</table>';
-                            echo '<form action="check_out.php" method="post"><button type="submit" id="confirm" name="confirm" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Confirm Order</button></form>';
+                            echo '<form action="check_out.php" method="post"><button type="submit" data-transition="slide"  id="confirm" name="confirm" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Confirm Order</button></form>';
                         } else {
                             echo '<center>Your cart is empty!</center>';
                         }
@@ -144,7 +144,7 @@
 
             </div><!-- /content -->
             <div>
-                <a href="customer.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b ui-shadow">Return</a>
+                <a href="customer.php" data-transition="slide"  class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b ui-shadow">Return</a>
             </div>
             <div data-role="footer">
                 <center><h5 style="color:#B0B0B0;">This web application was developed by PVP.</h5></center>

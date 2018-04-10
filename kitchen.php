@@ -38,7 +38,7 @@
                             echo '<ul data-role="listview" data-inset="true">';
                             while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 
-                                echo '  <li><a href="edit_order.php?id=' . $row['id'] . '"> Nº: ' . $row['id'] . ' <br> Created on: ' . $row['date_time_of_creation'] .' <br> Status: ' . $row['status'] . ' <br> Table No.: ' . $row['table_id'] . '</a></li>';
+                                echo '  <li><a href="edit_order.php?id=' . $row['id'] . '" data-transition="slide"> Nº: ' . $row['id'] . ' <br> Created on: ' . $row['date_time_of_creation'] .' <br> Status: ' . $row['status'] . ' <br> Table No.: ' . $row['table_id'] . '</a></li>';
 
                             }
                             echo '</ul>';
@@ -49,8 +49,8 @@
                     } catch(PDOException $e) {
 
                     }
-                echo '<a href="orders_on.php" class="ui-btn ui-icon-arrow-r ui-btn-icon-left ui-btn-b" >View Orders Being Prepared</a>';
-                echo '<form action="index.php" method="post"><button type="submit" id="hLogout" name="hLogout" class="ui-btn ui-icon-power ui-btn-icon-left ui-btn-b">Log out</button></form>';
+                echo '<a href="orders_on.php" data-transition="slide" class="ui-btn ui-icon-arrow-r ui-btn-icon-left ui-btn-b" >View Orders Being Prepared</a>';
+                echo '<form action="index.php" method="post"><button type="submit" id="hLogout" name="hLogout" data-transition="slide" class="ui-btn ui-icon-power ui-btn-icon-left ui-btn-b">Log out</button></form>';
                 ?>
 
             </div><!-- /content -->

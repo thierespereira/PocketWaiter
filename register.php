@@ -246,15 +246,15 @@
                         }
                      ?>
 
-                    <button type="submit" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Register</button>
+                    <button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Register</button>
 
                     <?php
                         if(!isset($_SESSION['user_type'])) {
-                            echo '<a href="index.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                            echo '<a href="index.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
                         } else if($_SESSION['user_type']  == 'admin') {
-                            echo '<a href="administrator.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                            echo '<a href="administrator.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
                         } else {
-                            echo '<a href="index.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                            echo '<a href="index.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
                         }
                     ?>
                 </form>

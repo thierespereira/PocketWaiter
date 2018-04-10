@@ -213,19 +213,19 @@
                                     if($_SESSION['user_type'] == 'admin') {
                                         echo '<fieldset data-role="controlgroup">';
                                         echo '<label>fieldset</label>';
-                                        echo '<button class="ui-btn ui-icon-refresh ui-btn-icon-left ui-btn-b" name="reset_password" id="reset_password">Reset Password</button>';
+                                        echo '<button data-transition="slide" class="ui-btn ui-icon-refresh ui-btn-icon-left ui-btn-b" name="reset_password" id="reset_password">Reset Password</button>';
                                         echo '</fieldset>';
                                     } else {
-                                        echo '<a href="change_password.php" class="ui-btn ui-icon-edit ui-btn-icon-left ui-btn-b">Change Password</a>';
+                                        echo '<a href="change_password.php" data-transition="slide" class="ui-btn ui-icon-edit ui-btn-icon-left ui-btn-b">Change Password</a>';
                                     }
-                                    echo '<button type="submit" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>';
+                                    echo '<button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>';
 
                                     if($_SESSION['user_type']  == 'admin') {
-                                        echo '<a href="administrator.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                                        echo '<a href="administrator.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
                                     } else if($_SESSION['user_type']  == 'staffadmin') {
-                                        echo '<a href="staffadmin.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                                        echo '<a href="staffadmin.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
                                     } else {
-                                        echo '<a href="customer.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                                        echo '<a href="customer.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
                                     }
                                     echo '</form>';
                                 }

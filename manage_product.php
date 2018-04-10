@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pocket Waiter - No More Queues!</title>
+        <title>Manage Products</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
         <script src="js/jquery-1.11.1.min.js"></script>
@@ -15,17 +15,16 @@
 
             <?php
                 include('header.php');
+
+                if(!isset($_SESSION['user_type']) || ($_SESSION['user_type']  != 'staffadmin')) {
+                    echo '<script>window.location = "index.php" </script>';
+                    die;
+                }
             ?>
 
             <div role="main" class="ui-content">
-                <form action="menu.php" method="post" onsubmit="return validateMyForm(this);">
-                    <center><label for="code">Enter the table code below:</label></center>
-                    <input type="text" data-clear-btn="true" name="code" id="code" value="<?php echo isset($_POST['code']) ? $_POST['code'] : '' ?>">
-                    <button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b" >OK</button>
-                </form>
-                <br>
-                <a href="login.php" id="link" data-transition="slide" class="ui-btn ui-btn-b ui-shadow">Login</a>
-                <a href="register.php" data-transition="slide" class="ui-btn ui-btn-b ui-shadow">Register</a>
+                <a href="add_product.php" id="link" data-transition="slide" class="ui-btn ui-btn-b ui-shadow">Add a Product</a>
+                <a href="staffadmin.php" id="link" data-transition="slide" class="ui-btn ui-btn-b ui-shadow">Return</a>
             </div><!-- /content -->
 
             <div data-role="footer">

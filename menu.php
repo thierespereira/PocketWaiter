@@ -83,8 +83,8 @@
                 <form action="menu.php" method="post" onsubmit="return validateMyForm(this);">
                     <center><label for="code">Enter the table code below:</label></center>
                     <input type="text" data-clear-btn="true" name="code" id="code" value="<?php echo isset($_POST['code']) ? $_POST['code'] : '' ?>">
-                    <button type="submit" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b" >OK</button>
-                    <a href="customer.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
+                    <button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b" >OK</button>
+                    <a href="customer.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
                 </form>
             </div><!-- /content -->
 

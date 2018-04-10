@@ -149,7 +149,7 @@
                     <input type="password" data-clear-btn="true" name="password" id="password" value="" autocomplete="off">
                     <label for="rePassword">Re-enter Password:</label>
                     <input type="password" data-clear-btn="true" name="rePassword" id="rePassword" value="" autocomplete="off">
-                    <button type="submit" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>
+                    <button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>
                 </form>
             </div>
 

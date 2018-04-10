@@ -38,7 +38,7 @@
                             echo '<ul data-role="listview" data-inset="true">';
                             while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 
-                                echo '  <li><a href="edit_orders_on.php?id=' . $row['id'] . '"> Nº: ' . $row['id'] . ' <br> Created on: ' . $row['date_time_of_creation'] .' <br> Status: ' . $row['status'] . ' <br> Table No.: ' . $row['table_id'] . '</a></li>';
+                                echo '  <li><a href="edit_orders_on.php?id=' . $row['id'] . '" data-transition="slide"> Nº: ' . $row['id'] . ' <br> Created on: ' . $row['date_time_of_creation'] .' <br> Status: ' . $row['status'] . ' <br> Table No.: ' . $row['table_id'] . '</a></li>';
 
                             }
                             echo '</ul>';
@@ -49,7 +49,7 @@
                     } catch(PDOException $e) {
 
                     }
-                echo '<a href="kitchen.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                echo '<a href="kitchen.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
                 ?>
 
             </div><!-- /content -->

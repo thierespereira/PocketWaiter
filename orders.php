@@ -76,7 +76,7 @@
             ?>
 
                 <div>
-                    <a href="customer.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b ui-shadow">Return</a>
+                    <a href="customer.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b ui-shadow">Return</a>
                 </div>
             </div><!-- /content -->
 

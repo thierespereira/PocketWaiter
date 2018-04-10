@@ -43,7 +43,7 @@
                         if ($sth->rowCount() > 0) {
                             echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search products..." data-inset="true"> ';
                             while ($row = $sth->fetch(PDO::FETCH_ASSOC))  {
-                                echo '<li><a href="view_product.php?id=' . $row['id'] . '">' .  $row['id'] . ' - ' . $row['name'] . ' - €' . $row['price'] . '</a></li>';
+                                echo '<li><a href="view_product.php?id=' . $row['id'] . '" data-transition="slide">' .  $row['id'] . ' - ' . $row['name'] . ' - €' . $row['price'] . '</a></li>';
                             }
                             echo '</ul>';
                         } else {
@@ -56,7 +56,7 @@
                 ?>
             </div><!-- /content -->
             <div>
-                <a href="customer.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b ui-shadow">Return</a>
+                <a href="customer.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b ui-shadow">Return</a>
             </div>
             <div data-role="footer">
                 <center><h5 style="color:#B0B0B0;">This web application was developed by PVP.</h5></center>

@@ -141,6 +141,7 @@
                         }
                     }
                 ?>
+
                 <form action="login.php" method="post" onsubmit="return validateMyForm(this);">
                     <label for="email">E-mail:</label>
                     <input type="text" data-clear-btn="true" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
