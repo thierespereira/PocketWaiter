@@ -24,33 +24,10 @@
 
             <div role="main" class="ui-content">
                 <a href="register.php" data-transition="slide" class="ui-btn ui-icon-plus ui-btn-icon-left ui-btn-b ui-shadow">Create New User</a>
-                <a href="manage_product.php" data-transition="slide" class="ui-btn ui-icon-plus ui-btn-icon-left ui-btn-b ui-shadow">Manage Products</a>
+                <a href="manage_product.php" data-transition="slide" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b ui-shadow">Manage Products</a>
                 <a href="manage_table.php" data-transition="slide" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b">Manage Tables</a>
                 <a href="edit_user.php" data-transition="slide" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b">Edit My Profile</a>
-                <?php
-                    try {
-                        //Create db connection
-                        include('database.php');
-
-                        $sql = "select * from product";
-                        $sth = $DBH->prepare($sql);
-
-                        $sth->execute();
-
-                        if ($sth->rowCount() > 0) {
-                            echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search products..." data-inset="true"> ';
-                            while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-                                echo '<li data-icon="edit"><a href="edit_product.php?id=' . $row['id'] . '">' .  $row['id'] . ' - ' . $row['name'] . '</a></li>';
-                            }
-                            echo '</ul>';
-                        } else {
-                            $error = 'No products.';
-                        }
-                    } catch(PDOException $e) {
-                        $error .= $e;
-                        echo $e;
-                    }
-                ?>
+                
                 <form action="index.php" method="post"><button type="submit" id="hLogout" name="hLogout" data-transition="slide" class="ui-btn ui-icon-power ui-btn-icon-left ui-btn-b">Log out</button></form>
             </div><!-- /content -->
 
