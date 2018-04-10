@@ -42,7 +42,7 @@
                         if ($sth->rowCount() > 0) {
                             echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search tables..." data-inset="true"> ';
                             while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-                                echo '<li data-icon="edit"><a href="edit_table.php?id=' . $row['id'] . '">' .  $row['code'] . '</a></li>';
+                                echo '<li data-icon="edit">' .  $row['code'] . '</li>';
                             }
                             echo '</ul>';
                         } else {
