@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Account Administrator</title>
+        <title>Manage Table</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
         <script src="js/jquery-1.11.1.min.js"></script>
@@ -23,28 +23,27 @@
             ?>
 
             <div role="main" class="ui-content">
-                <a href="register.php" data-transition="slide" class="ui-btn ui-icon-plus ui-btn-icon-left ui-btn-b ui-shadow">Create New User</a>
-                <a href="add_product.php" class="ui-btn ui-icon-plus ui-btn-icon-left ui-btn-b ui-shadow">Add a new Product</a>
-                <a href="edit_user.php" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b">Edit My Profile</a>
-                <a href="manage_table.php" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b">Manage Tables</a>
+                <a href="add_table.php" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b">Add Table</a>
                 <?php
                     try {
                         //Create db connection
                         include('database.php');
+                        echo("select * from table where comp_id = ");
+                        $comp_id = $_SESSION['comp_id'];
 
-                        $sql = "select * from product";
+                        $sql = "select * from comptable where comp_id = " + $comp_id;
                         $sth = $DBH->prepare($sql);
 
                         $sth->execute();
 
                         if ($sth->rowCount() > 0) {
-                            echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search products..." data-inset="true"> ';
+                            echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search tables..." data-inset="true"> ';
                             while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-                                echo '<li data-icon="edit"><a href="edit_product.php?id=' . $row['id'] . '">' .  $row['id'] . ' - ' . $row['name'] . '</a></li>';
+                                echo '<li data-icon="edit"><a href="edit_table.php?id=' . $row['id'] . '">' .  $row['code'] . '</a></li>';
                             }
                             echo '</ul>';
                         } else {
-                            $error = 'No products.';
+                            $error = 'No tables.';
                         }
                     } catch(PDOException $e) {
                         $error .= $e;
