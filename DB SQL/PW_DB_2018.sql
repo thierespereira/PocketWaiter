@@ -83,13 +83,15 @@ CREATE TABLE IF NOT EXISTS `order` (
   PRIMARY KEY (`id`),
   KEY `FK_order_table` (`table_id`),
   CONSTRAINT `FK_order_table` FOREIGN KEY (`table_id`) REFERENCES `comptable` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table pocketwaiter.order: ~2 rows (approximately)
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
 INSERT INTO `order` (`id`, `user_id`, `total`, `date_time_of_creation`, `status`, `table_id`) VALUES
-	(6, 3, 17.69, '2018-04-09 15:45:27', 'Ready', NULL),
-	(7, 3, 22.75, '2018-04-09 16:40:51', 'Ready', NULL);
+	(6, 3, 17.69, '2018-04-09 15:45:27', 'Ready', 20),
+	(7, 3, 22.75, '2018-04-09 16:40:51', 'Ready', 1),
+	(8, 3, 5.95, '2018-04-10 18:07:55', 'Being Prepared', 1),
+	(9, 3, 9.90, '2018-04-10 18:13:15', 'Open', 2);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 
 -- Dumping structure for table pocketwaiter.order_items
@@ -106,10 +108,13 @@ CREATE TABLE IF NOT EXISTS `order_items` (
 /*!40000 ALTER TABLE `order_items` DISABLE KEYS */;
 INSERT INTO `order_items` (`order_id`, `item`, `product_id`) VALUES
 	(7, 1, 1),
+	(8, 1, 1),
+	(9, 2, 1),
 	(7, 2, 5),
 	(7, 3, 7),
 	(7, 4, 8),
 	(7, 5, 8),
+	(9, 1, 8),
 	(6, 1, 11),
 	(6, 3, 14),
 	(6, 2, 15),
