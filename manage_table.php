@@ -24,12 +24,12 @@
 
             <div role="main" class="ui-content">
                 <a href="add_table.php" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b">Add Table</a>
-                <a href="manage_table.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
+                <a href="staffadmin.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
                 <?php
                     try {
                         //Create db connection
                         include('database.php');
-                        
+
                         $comp_id = $_SESSION['comp_id'];
 
                         $sql = "select * from comptable where comp_id = ?";
