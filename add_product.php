@@ -125,7 +125,7 @@
                         if(empty($registered)) {
                             echo '<div id="message" style="background-color:lightgreen;">';
                             echo 'Product added successfully.<br>';
-                            echo 'Please click <a href="staffadmin.php">here</a> to view a list of products.';
+                            echo 'Please click <a href="staffadmin.php" data-transition="slide" >here</a> to view a list of products.';
                             echo '<br>';
                             echo '</div><br>';
                         }
@@ -139,8 +139,8 @@
                     <textarea name="description" id="description"><?php echo (isset($_POST['description']) && !$registered) ? $_POST['description'] : '' ?></textarea>
                     <label for="price">Price:</label>
                     <input type="text" data-clear-btn="true" name="price" id="price" value="<?php echo (isset($_POST['price']) && !$registered) ? $_POST['price'] : '' ?>">
-                    <button type="submit" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>
-                    <a href="staffadmin.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
+                    <button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>
+                    <a href="staffadmin.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
                 </form>
             </div><!-- /content -->
 

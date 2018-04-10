@@ -189,8 +189,8 @@
                     <label for="phone">Logo:</label>
                     <input type="file" data-clear-btn="true" name="logo" id="logo" value="<?php echo isset($_POST['logo']) ? $_POST['logo'] : '' ?>">
                     -->
-                    <button type="submit" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Register</button>
-                    <a href="administrator.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
+                    <button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Register</button>
+                    <a href="administrator.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
                 </form>
             </div><!-- /content -->
 

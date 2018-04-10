@@ -77,11 +77,11 @@
 
                 echo '<form action="edit_order.php?id=' . $_GET['id'] . '" method="post">';
                 if($status == 'Open') {
-                    echo '<center><button id="update_status" name="update_status" class="ui-btn ui-icon-tag ui-btn-icon-left ui-btn-b">Mark as "Being Prepared..."</button></center>';
+                    echo '<center><button id="update_status" name="update_status" data-transition="slide" class="ui-btn ui-icon-tag ui-btn-icon-left ui-btn-b">Mark as "Being Prepared..."</button></center>';
                 } else {
-                    echo '<a href="print_order.php?id=' . $_GET['id'] . '" target="_blank" class="ui-btn ui-icon-action ui-btn-icon-left ui-btn-b">Print Receipt</a>';
+                    echo '<a href="print_order.php?id=' . $_GET['id'] . '" target="_blank" data-transition="slide" class="ui-btn ui-icon-action ui-btn-icon-left ui-btn-b">Print Receipt</a>';
                 }
-                echo '<a href="kitchen.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b">Return</a>';
+                echo '<a href="kitchen.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b">Return</a>';
                 echo '</form>';
             ?>
         </div>

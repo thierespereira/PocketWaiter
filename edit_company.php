@@ -164,8 +164,8 @@
                                     echo '<label for="address">Address:</label>';
                                     echo '<textarea name="address" id="address">' . $address . '</textarea>';
                                 }
-                                    echo '<button type="submit" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>';
-                                    echo '<a href="administrator.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                                    echo '<button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>';
+                                    echo '<a href="administrator.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
                                     echo '</form>';
                             } else {
                                 $error = 'Company not found.';

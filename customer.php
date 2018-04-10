@@ -44,7 +44,7 @@
                     <a href="edit_user.php" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b">Edit My Profile</a>
                     <a href="menu.php" class="ui-btn ui-icon-grid ui-btn-icon-left ui-btn-b" >View Menu</a>
                     <a href="orders.php" class="ui-btn ui-icon-bullets ui-btn-icon-left ui-btn-b" >My Orders</a>
-                    <form action="index.php" method="post"><button type="submit" id="hLogout" name="hLogout" class="ui-btn ui-icon-power ui-btn-icon-left ui-btn-b">Log out</button></form>
+                    <form action="index.php" method="post"><button type="submit" data-transition="slide" id="hLogout" name="hLogout" class="ui-btn ui-icon-power ui-btn-icon-left ui-btn-b">Log out</button></form>
                 </form>
             </div><!-- /content -->
 
