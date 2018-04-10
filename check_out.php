@@ -13,23 +13,14 @@
     <body>
         <div data-role="page" style="width=100%; margin:0;" data-theme="b">
 
-            <?php
-                include('header.php');
+            <div role="main" class="ui-content">
+                <?php
 
                 if(!isset($_SESSION['user_type'])) {
                     echo '<script>window.location = "index.php" </script>';
                     die;
                 }
 
-
-                if($_SESSION['user_type']  != 'customer') {
-                    echo '<script>window.location = "index.php" </script>';
-                    die;
-                }
-            ?>
-
-            <div role="main" class="ui-content">
-                <?php
                     include('database.php');
                     if(isset($_SESSION['cart'])) {
                         $cart = $_SESSION['cart'];
@@ -44,7 +35,7 @@
                             } else {
                                 if(isset($_POST['confirm'])) {
                                     try {
-                                        $sql = "insert into `pocketwaiter`.`order` (`user_id`, `total`, `date_time_of_creation`, `status`) values ('" . $_SESSION['user_id'] . "', '0.00', Now(), 'Open');";
+                                        $sql = "insert into `pocketwaiter`.`order` (`user_id`, `total`, `date_time_of_creation`, `status`, `table_id`) values ('" . $_SESSION['user_id'] . "', '0.00', Now(), 'Open', " . $_SESSION['table_id'] . ");";
 
                                         $sth = $DBH->prepare($sql);
 

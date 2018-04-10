@@ -23,7 +23,10 @@
 
                         if(isset($_GET['code'])){
                             $code = $_GET['code'];
+                            $_SESSION['code'] = $code;
                         }
+
+                        echo '<a href="check_out.php" class="ui-btn ui-icon-shop ui-btn-icon-left ui-btn-b">Checkout</a>';
 
                         include('database.php');
 
@@ -50,7 +53,15 @@
                 ?>
             </div><!-- /content -->
             <div>
-                <a href="customer.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b ui-shadow">Return</a>
+                <?php
+                if(!isset($_SESSION['user_type'])) {
+                    echo '<a href="index.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                } else if($_SESSION['user_type']  == 'customer') {
+                    echo '<a href="customer.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                } else {
+                    echo '<a href="index.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                }
+                ?>
             </div>
             <div data-role="footer">
                 <center><h5 style="color:#B0B0B0;">This web application was developed by PVP.</h5></center>

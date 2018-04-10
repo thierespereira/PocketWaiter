@@ -19,6 +19,7 @@
         <div data-role="page" style="width=100%; margin:0;" data-theme="b">
             <?php
                 if($_POST) {
+
                     $cart = array();
                     if(isset($_SESSION['cart'])) {
                         $cart = $_SESSION['cart'];
@@ -36,8 +37,8 @@
                 <?php
                     try {
                         $productId = $_GET['id'];
-                        $code = $_GET['code'];
-
+                        $code = $_SESSION['code'];
+                        
                         include('database.php');
 
                         $sql = 'select * from product where id = ?';

@@ -26,13 +26,7 @@
 
 
 
-                if(!isset($_SESSION['user_type'])) {
-                    echo '<script>window.location = "index.php" </script>';
-                    die;
-                }
-
-
-                if($_SESSION['user_type']  != 'customer') {
+                if(!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'customer') {
                     echo '<script>window.location = "index.php" </script>';
                     die;
                 }
@@ -42,7 +36,7 @@
                  <form action="customer.php" method="post">
                     <?php echo '<a href="check_out.php" class="ui-btn ui-icon-shop ui-btn-icon-left ui-btn-b">Checkout</a>' ?>
                     <a href="edit_user.php" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b">Edit My Profile</a>
-                    <a href="menu.php" class="ui-btn ui-icon-grid ui-btn-icon-left ui-btn-b" >View Menu</a>
+                    <a href="scan_code.php" class="ui-btn ui-icon-grid ui-btn-icon-left ui-btn-b" >View Menu</a>
                     <a href="orders.php" class="ui-btn ui-icon-bullets ui-btn-icon-left ui-btn-b" >My Orders</a>
                     <form action="index.php" method="post"><button type="submit" data-transition="slide" id="hLogout" name="hLogout" class="ui-btn ui-icon-power ui-btn-icon-left ui-btn-b">Log out</button></form>
                 </form>

@@ -40,6 +40,7 @@
                             $sth = $DBH->prepare($sql);
                             $sth->bindParam(1, $_GET['id'], PDO::PARAM_INT);
                             $sth->execute();
+
                         } else if(isset($_POST['printPDF'])) {
 
                             echo '<script>window.location = "print_order.php?id=' . $_GET['id'] . '"</script>';

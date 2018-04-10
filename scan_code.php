@@ -4,67 +4,65 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Login</title>
+        <title>Enter Table Code</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
         <script src="js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript" language="javascript">
-
+        <script>
             function validateMyForm(form) {
                 $("#erroMessage").html('');
                 var ret = true;
-                var re_mail = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z])+$/;
 
-                if (!form.email.value.trim()) {
-                    $("#erroMessage").append('Please enter an email.<br>');
-                    ret = false;
-                } else {
-                    if (!re_mail.test(email.value.trim())) {
-                        $("#erroMessage").append('Please enter a valid email.<br>');
-                        ret = false;
-                    }
-                }
-
-                if(!form.password.value.trim()) {
-                    $('#erroMessage').append('Please enter a password.');
+                if(!form.code.value.trim()) {
+                    $('#erroMessage').append('Please enter a table code.');
                     ret = false;
                 }
                 return ret;
             }
         </script>
-        <style>
-        #divider {
-                border-left: 1px dashed;
-            }
-        </style>
     </head>
     <body>
-        <?php
-
-            if($_POST) {
-
-                $code = $_POST['code'];
-                $error = '';
-            }
-
-            if(!isset($_SESSION['user_type'])) {
-                echo '<script>window.location = "index.php" </script>';
-                die;
-            }
-
-
-            if($_SESSION['user_type']  != 'customer') {
-                echo '<script>window.location = "index.php" </script>';
-                die;
-            }
-
-        ?>
-
         <div data-role="page" style="width=100%; margin:0;" data-theme="b">
 
             <?php
                 include('header.php');
+            ?>
+
+            <?php
+                if($_POST){
+                    $code = $_POST['code'];
+                    $error = '';
+
+                    if($code == ''){
+                        $error .= "Please enter a code table";
+                    }
+
+                    if($error == '') {
+                        try{
+                            include('database.php');
+
+                            $sql = "select * from comptable where comptable.code = ?;";
+                            $sth = $DBH->prepare($sql);
+
+                            $sth->bindParam(1,$code, PDO::PARAM_INT);
+
+                            $sth->execute();
+
+                            if($sth->rowCount() > 0){
+                                $row = $sth->fetch(PDO::FETCH_ASSOC);
+                                $_SESSION['table_id'] = $row['id'];
+                                echo '<script>window.location = "menu.php?code=' . $row['code'] . '" </script>';
+                                die;
+                            }
+
+                        } catch(PDOException $e) {
+                            $error .= $e;
+                            echo $e;
+                        }
+                    }
+                }
+
             ?>
 
             <div role="main" class="ui-content">
@@ -80,14 +78,23 @@
                         }
                     }
                 ?>
-                <form action="menu.php" method="post" onsubmit="return validateMyForm(this);">
-                    <center><label for="code">Enter the table code below:</label></center>
+                <form action="index.php" method="post" onsubmit="return validateMyForm(this);">
+                    <center><label for="code">Enter table code</label></center>
                     <input type="text" data-clear-btn="true" name="code" id="code" value="<?php echo isset($_POST['code']) ? $_POST['code'] : '' ?>">
-                    <button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b" >OK</button>
-                    <a href="customer.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
+                    <button type="submit" data-transition="slide" class="ui-btn ui-btn-b" >OK</button>
                 </form>
             </div><!-- /content -->
-
+            <div>
+                <?php
+                if(!isset($_SESSION['user_type'])) {
+                    echo '<a href="index.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                } else if($_SESSION['user_type']  == 'customer') {
+                    echo '<a href="customer.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                } else {
+                    echo '<a href="index.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';
+                }
+                ?>
+            </div>
             <div data-role="footer">
                 <center><h5 style="color:#B0B0B0;">This web application was developed by PVP.</h5></center>
             </div><!-- /footer -->

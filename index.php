@@ -32,37 +32,56 @@
             <?php
                 if($_POST){
                     $code = $_POST['code'];
+                    $error = '';
 
-                    try{
-                        include('database.php');
-
-                        $sql = "select * from comptable where comptable.code = ?;";
-                        $sth = $DBH->prepare($sql);
-
-                        $sth->bindParam(1,$code, PDO::PARAM_INT);
-
-                        $sth->execute();
-
-                        if($sth->rowCount() > 0){
-                            $row = $sth->fetch(PDO::FETCH_ASSOC);
-                            echo '<script>window.location = "menu.php?code=' . $row['code'] . '" </script>';
-                            die;
-                        }
-
-                    } catch(PDOException $e) {
-                        $error .= $e;
-                        echo $e;
+                    if($code == ''){
+                        $error .= "Please enter a code table";
                     }
 
+                    if($error == '') {
+                        try{
+                            include('database.php');
+
+                            $sql = "select * from comptable where comptable.code = ?;";
+                            $sth = $DBH->prepare($sql);
+
+                            $sth->bindParam(1,$code, PDO::PARAM_INT);
+
+                            $sth->execute();
+
+                            if($sth->rowCount() > 0){
+                                $row = $sth->fetch(PDO::FETCH_ASSOC);
+                                $_SESSION['table_id'] = $row['id'];
+                                echo '<script>window.location = "menu.php?code=' . $row['code'] . '" </script>';
+                                die;
+                            }
+
+                        } catch(PDOException $e) {
+                            $error .= $e;
+                            echo $e;
+                        }
+                    }
                 }
 
             ?>
 
             <div role="main" class="ui-content">
+                <div id="erroMessage" style="color:red; background-color:#FFE4E4;">
+                </div>
+                <?php
+                    if($_POST) {
+                        if($error) {
+                            echo '<div id="message" style="color:red; background-color:#FFE4E4;">';
+                            echo '<center><b>' . $error . '</b></center';
+                            echo '</div>';
+                            echo '<br>';
+                        }
+                    }
+                ?>
                 <form action="index.php" method="post" onsubmit="return validateMyForm(this);">
                     <center><label for="code">Enter table code</label></center>
                     <input type="text" data-clear-btn="true" name="code" id="code" value="<?php echo isset($_POST['code']) ? $_POST['code'] : '' ?>">
-                    <button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b" >OK</button>
+                    <button type="submit" data-transition="slide" class="ui-btn ui-btn-b" >OK</button>
                 </form>
                 <br>
                 <center>Or log in to continue</center>
