@@ -140,7 +140,7 @@
                     <label for="price">Price:</label>
                     <input type="text" data-clear-btn="true" name="price" id="price" value="<?php echo (isset($_POST['price']) && !$registered) ? $_POST['price'] : '' ?>">
                     <button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>
-                    <a href="staffadmin.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
+                    <a href="manage_product.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
                 </form>
             </div><!-- /content -->
 

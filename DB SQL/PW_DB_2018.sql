@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `email`, `password`, `salt`, `type`, `phone_number`, `address`, `comp_id`) VALUES
 	(1, 'admin@gmail.com', '62d2658576e4fd3102554d96c8516fba', 'thisisntasalt', 'admin', '0871925550', 'Dublin 8', NULL),
-	(2, 'staffadmin@gmail.com', 'c9bc4f9f5cb8d582e061aeb3af964d71', 'thisisntasalt', 'staffadmin', '0871925555', 'Dublin 11', NULL),
+	(2, 'staffadmin@gmail.com', 'c9bc4f9f5cb8d582e061aeb3af964d71', 'thisisntasalt', 'staffadmin', '0871925555', 'Dublin 11', 1),
 	(3, 'customer@gmail.com', 'c9bc4f9f5cb8d582e061aeb3af964d71', 'thisisntasalt', 'customer', '0871925555', 'Dublin 1', NULL),
 	(5, 'kitchen@gmail.com', 'c9bc4f9f5cb8d582e061aeb3af964d71', 'thisisntasalt', 'kitchen', '0871923334', 'Dublin 2', NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
