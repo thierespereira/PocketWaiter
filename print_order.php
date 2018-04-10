@@ -5,7 +5,7 @@
         die;
     }
 
-    if($_SESSION['user_type'] != 'staff') {
+    if($_SESSION['user_type'] != 'kitchen') {
         echo '<script>window.location = "index.php"</script>';
         die;
     }
@@ -131,7 +131,7 @@ $pdf->Write( 46, "Date of Creation: " . $dateCreated);
 $pdf->Ln( 6 );
 $pdf->Write( 46, "Customer: " . $customer);
 $pdf->Ln( 6 );
-$pdf->Write( 46, "Phone number: " . $phone);
+$pdf->Write( 46, "Phone No.: " . $phone);
 $pdf->Ln( 6 );
 $pdf->SetTextColor( $textColour[0], $textColour[1], $textColour[2] );
 $pdf->SetFont( 'Arial', '', 15 );

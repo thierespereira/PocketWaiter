@@ -144,7 +144,7 @@
 
             </div><!-- /content -->
             <div>
-                <a href="customer.php" data-transition="slide"  class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b ui-shadow">Return</a>
+                <a href="customer.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b ui-shadow">Return</a>
             </div>
             <div data-role="footer">
                 <center><h5 style="color:#B0B0B0;">This web application was developed by PVP.</h5></center>

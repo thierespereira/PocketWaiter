@@ -31,12 +31,13 @@
                         //Create db connection
                         include('database.php');
 
-                        $sql = "select * from product where comp_id = ?";
-
                         $comp_id = $_SESSION['comp_id'];
 
+                        $sql = "select * from product where comp_id = ?";
                         $sth = $DBH->prepare($sql);
+
                         $sth->bindParam(1,$comp_id, PDO::PARAM_INT);
+
                         $sth->execute();
 
                         if ($sth->rowCount() > 0) {

@@ -193,7 +193,7 @@
                         }
                     ?>
 
-                <form action="register.php" method="post" onsubmit="">
+                <form action="register.php" method="post" onsubmit="return validateMyForm(this)">
                     <label for="email">Email:</label>
                     <input type="text" data-clear-btn="true" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
                     <label for="password">Password:</label>

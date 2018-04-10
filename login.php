@@ -19,6 +19,11 @@
                 if (!form.email.value.trim()) {
                     $("#erroMessage").append('Please enter an email.<br>');
                     ret = false;
+                } else {
+                    if (!re_mail.test(email.value.trim())) {
+                        $("#erroMessage").append('Please enter a valid email.<br>');
+                        ret = false;
+                    }
                 }
 
                 if(!form.password.value.trim()) {
@@ -75,25 +80,25 @@
                         $sth->execute();
 
                         if ($sth->rowCount() > 0) {
-                            $rec = $sth->fetch(PDO::FETCH_ASSOC);                            
+                            $rec = $sth->fetch(PDO::FETCH_ASSOC);
+
                             $id = $rec['id'];
                             $type = $rec['type'];
                             $passwordHashed = $rec['password'];
                             $salt = $rec['salt'];
                             $newPassHashed = md5($password . $salt);
-                            $comp_id = $rec['comp_id'];
 
                             if ($passwordHashed == $newPassHashed) {
                                 $_SESSION['user_id'] = $id;
                                 $_SESSION['userEmail'] = $email;
                                 $_SESSION['user_type'] = $type;
                                 $_SESSION['sessionId'] = session_id();
+
                                 if($type == 'customer') {
 
                                     echo '<script>window.location = "customer.php" </script>';
                                     die;
                                 } else if($type == 'staffadmin') {
-                                    $_SESSION['comp_id'] = $comp_id;
                                     echo '<script>window.location = "staffadmin.php" </script>';
                                     die;
                                 } else if($type == 'admin') {
@@ -150,8 +155,8 @@
                     </center>
                     <input type="text" name="captcha_code" size="10" maxlength="6" />
                     -->
-                    <button type="submit" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Login</button>
-                    <a href="index.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
+                    <button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Login</button>
+                    <a href="index.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
                 </form>
             </div><!-- /content -->
 
