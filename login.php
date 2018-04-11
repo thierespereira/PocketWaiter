@@ -66,7 +66,7 @@
 
                 }
                 */
-                
+
                 if($error == '') {
                     // DB
                     try {
@@ -147,11 +147,13 @@
                     <input type="text" data-clear-btn="true" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
                     <label for="password">Password:</label>
                     <input type="password" data-clear-btn="true" name="password" id="password" value="" autocomplete="off">  <br>
+                    <!--
                     <center>
                         <label for="captcha_code">Solve this math problem:</label>
                         <img id="captcha" src="securimage/securimage_show.php" alt="CAPTCHA Image"/><br>
                         <a href="#" onclick="document.getElementById('captcha').src = 'securimage/securimage_show.php?' + Math.random(); return false">[Refresh Code]</a>
                     </center>
+                    -->
                     <input type="text" name="captcha_code" size="10" maxlength="6" />
                     <button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Login</button>
                     <a href="index.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
