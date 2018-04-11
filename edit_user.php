@@ -170,9 +170,9 @@
                                         echo '</div><br>';
                                     }
                                     echo '<form action="edit_user.php?id=' . $user_id . '' . '" method="post" onsubmit="return validateMyForm(this);">';
-                                    echo '<label for="text-1">Email:</label>';
+                                    echo '<label for="email">Email:</label>';
                                     echo '<input type="text" data-clear-btn="true" name="email" id="email" value="' . $email . '">';
-                                    echo '<label for="text-1">Phone number:</label>';
+                                    echo '<label for="phone">Phone number:</label>';
                                     echo '<input type="text" data-clear-btn="true" name="phone" id="phone" value="' . $phone . '">';
                                     echo '<label for="address">Address:</label>';
                                     echo '<textarea name="address" id="address">' . $address . '</textarea>';
