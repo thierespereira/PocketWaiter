@@ -10,7 +10,7 @@
         //Host Password
         $DB_PASS = '';
         //DB Name
-        $DB_NAME = 'pocketwaiter'; 
+        $DB_NAME = 'pwdb'; 
 
         $connStr = "mysql:host=".$DB_HOST.";port=3306;dbname=".$DB_NAME;
         $DBH = new PDO($connStr,$DB_USER,$DB_PASS);
