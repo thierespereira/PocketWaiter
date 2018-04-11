@@ -52,7 +52,7 @@
                         $error .= $e;
                         echo $e;
                     }
-                ?>                
+                ?>
             </div><!-- /content -->
 
             <div data-role="footer">

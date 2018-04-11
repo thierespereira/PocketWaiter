@@ -76,6 +76,9 @@
                         $name = $_POST['name'];
                         $description = $_POST['description'];
                         $price = $_POST['price'];
+                        $type = $_POST['type'];
+                        $comp_id = $_SESSION['comp_id'];
+                        $registered = '';
                         $error = '';
 
                         if($name == '') {
@@ -102,12 +105,14 @@
                             try {
                                 include('database.php');
 
-                                $sql = "insert into `product` (`name`, `description`, `price`) values (?,?,?);";
+                                $sql = "insert into `product` (`name`, `description`, `price`, `comp_id`, `type`) values (?,?,?,?,?);";
                                 $sth = $DBH->prepare($sql);
 
                                 $sth->bindParam(1,$name, PDO::PARAM_INT);
                                 $sth->bindParam(2,$description, PDO::PARAM_INT);
                                 $sth->bindParam(3,$price, PDO::PARAM_INT);
+                                $sth->bindParam(4,$comp_id, PDO::PARAM_INT);
+                                $sth->bindParam(5,$type, PDO::PARAM_INT);
                                 $sth->execute();
 
                             } catch(PDOException $e) {
@@ -125,7 +130,7 @@
                         if(empty($registered)) {
                             echo '<div id="message" style="background-color:lightgreen;">';
                             echo 'Product added successfully.<br>';
-                            echo 'Please click <a href="staffadmin.php" data-transition="slide" >here</a> to view a list of products.';
+                            echo 'Please click <a href="manage_product.php" data-transition="slide" >here</a> to view a list of products.';
                             echo '<br>';
                             echo '</div><br>';
                         }
@@ -139,6 +144,17 @@
                     <textarea name="description" id="description"><?php echo (isset($_POST['description']) && !$registered) ? $_POST['description'] : '' ?></textarea>
                     <label for="price">Price:</label>
                     <input type="text" data-clear-btn="true" name="price" id="price" value="<?php echo (isset($_POST['price']) && !$registered) ? $_POST['price'] : '' ?>">
+                    <?php
+                    echo '<div class="ui-field-contain">';
+                            echo '<label for="type">Type:</label>';
+                            echo '<select id="type" name="type">';
+                            echo '<option value="main"' . ($type == 'main' ? 'selected="selected"' : '' ) .'>Mains</option>';
+                            echo '<option value="side"' . ($type == 'side' ? 'selected="selected"' : '' ) . '>Sides</option>';
+                            echo '<option value="dessert"' . ($type == 'dessert' ? 'selected="selected"' : '' ) . '>Desserts</option>';
+                            echo '<option value="drink"' . ($type == 'drink' ? 'selected="selected"' : '' ) .'>Drinks</option>';
+                        echo '</select>';
+                    echo '</div>';
+                    ?>
                     <button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>
                     <a href="manage_product.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
                 </form>

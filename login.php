@@ -86,6 +86,7 @@
                             $type = $rec['type'];
                             $passwordHashed = $rec['password'];
                             $salt = $rec['salt'];
+                            $_SESSION['comp_id'] = $rec['comp_id'];
                             $newPassHashed = md5($password . $salt);
 
                             if ($passwordHashed == $newPassHashed) {

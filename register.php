@@ -217,7 +217,6 @@
                             echo '</div>';
 
                                 try {
-                                    //Create db connection
                                     include('database.php');
 
                                     $sql = "select id, name from company";
