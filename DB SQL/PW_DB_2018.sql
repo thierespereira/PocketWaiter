@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `comptable` (
   UNIQUE KEY `code` (`code`),
   KEY `FK__company` (`comp_id`),
   CONSTRAINT `FK__company` FOREIGN KEY (`comp_id`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table pocketwaiter.comptable: ~20 rows (approximately)
 /*!40000 ALTER TABLE `comptable` DISABLE KEYS */;
@@ -69,7 +69,8 @@ INSERT INTO `comptable` (`id`, `code`, `comp_id`) VALUES
 	(17, 'SKIN-7', 4),
 	(18, 'SKIN-8', 4),
 	(19, 'SKIN-9', 4),
-	(20, 'SKIN-10', 4);
+	(20, 'SKIN-10', 4),
+	(21, 'WOW-11', 1);
 /*!40000 ALTER TABLE `comptable` ENABLE KEYS */;
 
 -- Dumping structure for table pocketwaiter.order
@@ -85,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   CONSTRAINT `FK_order_table` FOREIGN KEY (`table_id`) REFERENCES `comptable` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
--- Dumping data for table pocketwaiter.order: ~2 rows (approximately)
+-- Dumping data for table pocketwaiter.order: ~4 rows (approximately)
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
 INSERT INTO `order` (`id`, `user_id`, `total`, `date_time_of_creation`, `status`, `table_id`) VALUES
 	(6, 3, 17.69, '2018-04-09 15:45:27', 'Ready', 20),
@@ -104,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `order_items` (
   CONSTRAINT `FK_order_items_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table pocketwaiter.order_items: ~9 rows (approximately)
+-- Dumping data for table pocketwaiter.order_items: ~12 rows (approximately)
 /*!40000 ALTER TABLE `order_items` DISABLE KEYS */;
 INSERT INTO `order_items` (`order_id`, `item`, `product_id`) VALUES
 	(7, 1, 1),
@@ -132,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   PRIMARY KEY (`id`),
   KEY `FK_product_company` (`comp_id`),
   CONSTRAINT `FK_product_company` FOREIGN KEY (`comp_id`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table pocketwaiter.product: ~16 rows (approximately)
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
@@ -152,7 +153,8 @@ INSERT INTO `product` (`id`, `name`, `description`, `price`, `comp_id`, `type`) 
 	(16, 'Ice-cream', 'Tub of assorted ice-cream flavour.', 3.65, 4, 'dessert'),
 	(17, 'Water', '1l of still water.', 1.25, 4, 'drink'),
 	(18, 'Coke', 'Can of Coke.', 1.25, 4, 'drink'),
-	(19, 'Sprite', 'Can of Sprite.', 1.25, 4, 'drink');
+	(19, 'Sprite', 'Can of Sprite.', 1.25, 4, 'drink'),
+	(24, 'Onion Rings', 'Golden crispy portion of onion rings seasoned with salt and pepper.', 3.95, 1, 'side');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
 -- Dumping structure for table pocketwaiter.user
