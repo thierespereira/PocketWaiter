@@ -11,61 +11,55 @@
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
         <script type="text/javascript" language="javascript">
 
-            function validateMyForm(form) {
+            function validateMyForm() {
+
+                var form = document.forms["register_company_form"];
+                
                 $("#errorMessage").html('');
                 var ret = true;
                 var re_mail = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z])+$/;
+                debugger;
 
-                if (!form.email.value.trim()) {
+                if(!form['name'].value.trim()) {
+                    $("#errorMessage").append('You must enter a name!<br>');
+                    ret = false;
+                } else {
+                    if(form['name'].value.trim().length > 100) {
+                        $('#errorMessage').append('The name is too long - Maximum 100 characteres!<br>');
+                        ret = false;
+                    }
+                }
+
+                if (!form['email'].value.trim()) {
                     $("#errorMessage").append('You must enter an email!<br>');
                     ret = false;
                 } else {
-                    if (!re_mail.test(email.value.trim())) {
+                    if (!re_mail.test(form['email'].value.trim())) {
                         $("#errorMessage").append('Not a valid email address!<br>');
                         ret = false;
                     } else {
-                        if(form.email.value.trim().length > 100) {
+                        if(form['email'].value.trim().length > 100) {
                             $("#errorMessage").append('Email - Maximum 100 characteres!<br>');
                             ret = false;
                         }
                     }
                 }
 
-                if(!form.password.value.trim()) {
-                    $('#errorMessage').append('You must enter a password!<br>');
-                    ret = false;
-                } else {
-                    if(form.password.value.trim().length < 6) {
-                        $('#errorMessage').append('The password is too short - Minimum 6 characteres!<br>');
-                        ret = false;
-                    }
-
-                    if(!form.rePassword.value.trim()) {
-                        $('#errorMessage').append('You must fill in "re-enter password" field!<br>');
-                        ret = false;
-                    } else {
-                        if(form.password.value.trim() != form.rePassword.value.trim()) {
-                            $('#errorMessage').append('The password is not a match!<br>');
-                            ret = false;
-                        }
-                    }
-                }
-
-                if(!form.phone.value.trim()) {
+                if(!form['phone'].value.trim()) {
                     $('#errorMessage').append('You must enter a phone number!<br>');
                     ret = false;
                 } else {
-                    if(form.phone.value.trim().length > 20) {
+                    if(form['phone'].value.trim().length > 20) {
                         $('#errorMessage').append('The phone number is too long - Maximum 20 characteres!<br>');
                         ret = false;
                     }
                 }
 
-                if(!form.address.value.trim()) {
+                if(!form['address'].value.trim()) {
                      $('#errorMessage').append('You must enter an address!<br>');
                     ret = false;
                 } else {
-                    if(form.address.value.trim().length > 200) {
+                    if(form['address'].value.trim().length > 200) {
                         $('#errorMessage').append('The address is too long - Maximum 150 characteres!<br>');
                         ret = false;
                     }
@@ -144,7 +138,7 @@
                     $sth->bindParam(4, $website, PDO::PARAM_INT);
                     $sth->bindParam(5, $phone, PDO::PARAM_INT);
                     $sth->bindParam(6, $address, PDO::PARAM_INT);
-                    $sth->bindParam(7, $logo, PDO::PARAM_INT);
+                    // $sth->bindParam(7, $logo, PDO::PARAM_INT);
 
                     $sth->execute();
                 }
@@ -172,7 +166,7 @@
                         }
                     ?>
 
-                <form action="register_company.php" method="post" onsubmit="return validateMyForm(this);">
+                <form name="register_company_form" action="register_company.php" method="post" onsubmit="return validateMyForm();">
                     <label for="name">Name:</label>
                     <input type="text" data-clear-btn="true" name="name" id="name" value="<?php echo isset($_POST['name']) ? $_POST['name'] : '' ?>">
                     <label for="email">Email:</label>
