@@ -102,6 +102,7 @@
                                 $website = $rec['website'];
                                 $phone = $rec['phone'];
                                 $address = $rec['address'];
+                                $file = $rec['logo'];
                                 if($_POST) {
                                     if($_POST['email'] == '') {
                                          $error .= 'You must enter an email!<br>';
@@ -150,6 +151,11 @@
                                         echo '<br>';
                                         echo '</div><br>';
                                     }
+                                    echo '<tr>';
+                                    echo '  <td>';
+                                    echo '      <center><img src="data:image/jpeg;base64,'. base64_encode($rec['logo']) . '"></center>';
+                                    echo '  </td>';
+                                    echo '</tr>';
                                     echo '<form action="edit_company.php?id=' . $user_id . '' . '" method="post" onsubmit="return validateMyForm(this);">';
                                     echo '<label for="name">Name:</label>';
                                     echo '<input type="text" data-clear-btn="true" name="name" id="name" value="' . $name . '">';

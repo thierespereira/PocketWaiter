@@ -18,6 +18,35 @@
             ?>
 
             <div role="main" class="ui-content">
+                <?php
+                    try {
+                        include('database.php');
+
+                        $sql = "select logo from company inner join comptable on company.id = comptable.comp_id where comptable.code = ?;";
+                        $sth = $DBH->prepare($sql);
+
+                        $sth->bindParam(1,$_GET['code'], PDO::PARAM_INT);
+
+                        $sth->execute();
+
+                        if ($sth->rowCount() > 0) {
+                            $rec = $sth->fetch(PDO::FETCH_ASSOC);
+                            $file = $rec['logo'];
+
+                        echo '<tr>';
+                        echo '  <td>';
+                        echo '      <center><img src="data:image/jpeg;base64,'. base64_encode($file) . '"></center>';
+                        echo '  </td>';
+                        echo '</tr>';
+                        }
+
+                    } catch(PDOException $e) {
+                        $error .= $e;
+                        echo $e;
+                    }
+
+
+                ?>
                 <a href="check_out.php" class="ui-btn ui-icon-shop ui-btn-icon-left ui-btn-b">Checkout</a>
                 <div>
                     <b><center>Mains</center></b>
