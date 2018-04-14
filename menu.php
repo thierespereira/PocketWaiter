@@ -20,37 +20,176 @@
             <div role="main" class="ui-content">
                 <?php
                     try {
-
-                        if(isset($_GET['code'])){
-                            $code = $_GET['code'];
-                            $_SESSION['code'] = $code;
-                        }
-
-                        echo '<a href="check_out.php" class="ui-btn ui-icon-shop ui-btn-icon-left ui-btn-b">Checkout</a>';
-
                         include('database.php');
 
-                        $sql = "select product.* from product inner join comptable on product.comp_id = comptable.comp_id where comptable.code = ?;";
+                        $sql = "select logo from company inner join comptable on company.id = comptable.comp_id where comptable.code = ?;";
                         $sth = $DBH->prepare($sql);
 
-                        $sth->bindParam(1,$code, PDO::PARAM_INT);
+                        $sth->bindParam(1,$_GET['code'], PDO::PARAM_INT);
 
                         $sth->execute();
 
                         if ($sth->rowCount() > 0) {
-                            echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search products..." data-inset="true"> ';
-                            while ($row = $sth->fetch(PDO::FETCH_ASSOC))  {
-                                echo '<li><a href="view_menu_item.php?id=' . $row['id'] . '&code=' . $code . '" data-transition="slide">' .  $row['id'] . ' - ' . $row['name'] . ' - €' . $row['price'] . '</a></li>';
-                            }
-                            echo '</ul>';
-                        } else {
-                            $error = 'No products.';
+                            $rec = $sth->fetch(PDO::FETCH_ASSOC);
+                            $file = $rec['logo'];
+
+                        echo '<tr>';
+                        echo '  <td>';
+                        echo '      <center><img src="data:image/jpeg;base64,'. base64_encode($file) . '"></center>';
+                        echo '  </td>';
+                        echo '</tr>';
                         }
+
                     } catch(PDOException $e) {
                         $error .= $e;
                         echo $e;
                     }
+
+
                 ?>
+                <a href="check_out.php" class="ui-btn ui-icon-shop ui-btn-icon-left ui-btn-b">Checkout</a>
+                <div>
+                    <b><center>Mains</center></b>
+                    <?php
+                        try {
+
+                            if(isset($_GET['code'])){
+                                $code = $_GET['code'];
+                                $_SESSION['code'] = $code;
+                            }
+
+                            include('database.php');
+
+                            $sql = "select product.* from product inner join comptable on product.comp_id = comptable.comp_id where comptable.code = ? and product.`type` = 'main';";
+                            $sth = $DBH->prepare($sql);
+
+                            $sth->bindParam(1,$code, PDO::PARAM_INT);
+
+                            $sth->execute();
+
+                            if ($sth->rowCount() > 0) {
+                                echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search products..." data-inset="true"> ';
+                                while ($row = $sth->fetch(PDO::FETCH_ASSOC))  {
+                                    echo '<li><a href="view_menu_item.php?id=' . $row['id'] . '&code=' . $code . '" data-transition="slide">' . $row['name'] . ' - €' . $row['price'] . '</a></li>';
+                                }
+                                echo '</ul>';
+                            } else {
+                                $error = 'No products.';
+                            }
+                        } catch(PDOException $e) {
+                            $error .= $e;
+                            echo $e;
+                        }
+                    ?>
+                </div>
+
+                <div>
+                    <b><center>Sides</center></b>
+                    <?php
+                        try {
+
+                            if(isset($_GET['code'])){
+                                $code = $_GET['code'];
+                                $_SESSION['code'] = $code;
+                            }
+
+                            include('database.php');
+
+                            $sql = "select product.* from product inner join comptable on product.comp_id = comptable.comp_id where comptable.code = ? and product.`type` = 'side';";
+                            $sth = $DBH->prepare($sql);
+
+                            $sth->bindParam(1,$code, PDO::PARAM_INT);
+
+                            $sth->execute();
+
+                            if ($sth->rowCount() > 0) {
+                                echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search products..." data-inset="true"> ';
+                                while ($row = $sth->fetch(PDO::FETCH_ASSOC))  {
+                                    echo '<li><a href="view_menu_item.php?id=' . $row['id'] . '&code=' . $code . '" data-transition="slide">' . $row['name'] . ' - €' . $row['price'] . '</a></li>';
+                                }
+                                echo '</ul>';
+                            } else {
+                                $error = 'No products.';
+                            }
+                        } catch(PDOException $e) {
+                            $error .= $e;
+                            echo $e;
+                        }
+                    ?>
+                </div>
+
+                <div>
+                    <b><center>Drinks</center></b>
+                    <?php
+                        try {
+
+                            if(isset($_GET['code'])){
+                                $code = $_GET['code'];
+                                $_SESSION['code'] = $code;
+                            }
+
+                            include('database.php');
+
+                            $sql = "select product.* from product inner join comptable on product.comp_id = comptable.comp_id where comptable.code = ? and product.`type` = 'drink';";
+                            $sth = $DBH->prepare($sql);
+
+                            $sth->bindParam(1,$code, PDO::PARAM_INT);
+
+                            $sth->execute();
+
+                            if ($sth->rowCount() > 0) {
+                                echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search products..." data-inset="true"> ';
+                                while ($row = $sth->fetch(PDO::FETCH_ASSOC))  {
+                                    echo '<li><a href="view_menu_item.php?id=' . $row['id'] . '&code=' . $code . '" data-transition="slide">' . $row['name'] . ' - €' . $row['price'] . '</a></li>';
+                                }
+                                echo '</ul>';
+                            } else {
+                                $error = 'No products.';
+                            }
+                        } catch(PDOException $e) {
+                            $error .= $e;
+                            echo $e;
+                        }
+                    ?>
+                </div>
+
+                <div>
+                    <b><center>Desserts</center></b>
+                    <?php
+                        try {
+
+                            if(isset($_GET['code'])){
+                                $code = $_GET['code'];
+                                $_SESSION['code'] = $code;
+                            }
+
+                            echo '';
+
+                            include('database.php');
+
+                            $sql = "select product.* from product inner join comptable on product.comp_id = comptable.comp_id where comptable.code = ? and product.`type` = 'dessert';";
+                            $sth = $DBH->prepare($sql);
+
+                            $sth->bindParam(1,$code, PDO::PARAM_INT);
+
+                            $sth->execute();
+
+                            if ($sth->rowCount() > 0) {
+                                echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search products..." data-inset="true"> ';
+                                while ($row = $sth->fetch(PDO::FETCH_ASSOC))  {
+                                    echo '<li><a href="view_menu_item.php?id=' . $row['id'] . '&code=' . $code . '" data-transition="slide">' . $row['name'] . ' - €' . $row['price'] . '</a></li>';
+                                }
+                                echo '</ul>';
+                            } else {
+                                $error = 'No products.';
+                            }
+                        } catch(PDOException $e) {
+                            $error .= $e;
+                            echo $e;
+                        }
+                    ?>
+                </div>
+
             </div><!-- /content -->
             <div>
                 <?php

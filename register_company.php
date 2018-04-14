@@ -8,14 +8,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
         <script src="js/jquery-1.11.1.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>        
+        <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
     </head>
     <body>
         <div data-role="page" style="width=100%; margin:0;" data-theme="b">
-            <script type="text/javascript" language="javascript">           
+            <script type="text/javascript" language="javascript">
                 function validateMyForm() {
                     var form = document.forms["register_company_form"];
-                    
+
                     $("#errorMessage").html('');
                     var ret = true;
                     var re_mail = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z])+$/;
@@ -66,6 +66,23 @@
                     }
                     return ret;
                 }
+
+                $(document).ready(function(){
+                    $('#insert').click(function(){
+                        var image_name = $('#image').val();
+                        if(image_name == ''){
+                            alert("Please select an image.");
+                            return false;
+                        } else {
+                            var extention = $('#image').val().split('.').pop().toLowercase();
+                            if (jQuery.inArray(extension, ['gif', 'pgn', 'jpg', 'jpeg']) == -1) {
+                                alert("Invalid image file!");
+                                $('#image').val('');
+                                return false;
+                            }
+                        }
+                    });
+                });
             </script>
 
             <?php
@@ -90,7 +107,6 @@
             $currfile = $_FILES['logo']['tmp_name'];
             $filename = $_FILES['logo']['name'];
             $logo_type = $_FILES['logo']['type'];
-            // ...
             if($filename != '') {
                 $bin_data = fopen($currfile, 'rb');
             }
@@ -105,50 +121,50 @@
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     $error .= "Not a valid email address!<br>";
                 }
-            }
 
-            if($phone == '') {
-                $error .= 'You must enter a phone number!<br>';
-            }
-
-            if($address == '') {
-                $error .= 'You must enter an address!<br>';
-            }
-
-
-            if(!$error) {
-                try {
-                    include('database.php');
-
-                    $sql = "select email from company where email = ?";
-                    $sth = $DBH->prepare($sql);
-
-                    $sth->bindParam(1,$email, PDO::PARAM_INT);
-
-
-                    $sth->execute();
-
-                    if ($sth->rowCount() > 0) {
-                        $error = 'The email is already registered in the system!<br>';
-                        $error .= 'Please enter a different email!';
-                    } else {
-                    $sql = "insert into `pocketwaiter`.`company` (`name`, `email`, `desc`, `website`, `phone`, `address`, `logo`, `logo_type`) values (?, ?, ?, ?, ?, ?, ?, ?);";
-                    $sth = $DBH->prepare($sql);
-
-                    $sth->bindParam(1, $name, PDO::PARAM_INT);
-                    $sth->bindParam(2, $email, PDO::PARAM_INT);
-                    $sth->bindParam(3, $desc, PDO::PARAM_INT);
-                    $sth->bindParam(4, $website, PDO::PARAM_INT);
-                    $sth->bindParam(5, $phone, PDO::PARAM_INT);
-                    $sth->bindParam(6, $address, PDO::PARAM_INT);
-                    $sth->bindParam(7, $bin_data, PDO::PARAM_LOB);
-                    $sth->bindParam(8, $logo_type, PDO::PARAM_INT);
-
-                    $sth->execute();
+                if($phone == '') {
+                    $error .= 'You must enter a phone number!<br>';
                 }
-                } catch(PDOException $e) {
-                    echo $e;
-                    die;
+
+                if($address == '') {
+                    $error .= 'You must enter an address!<br>';
+                }
+
+
+                if(!$error) {
+                    try {
+                        include('database.php');
+
+                        $sql = "select email from company where email = ?";
+                        $sth = $DBH->prepare($sql);
+
+                        $sth->bindParam(1,$email, PDO::PARAM_INT);
+
+
+                        $sth->execute();
+
+                        if ($sth->rowCount() > 0) {
+                            $error = 'The email is already registered in the system!<br>';
+                            $error .= 'Please enter a different email!';
+                        } else {
+                            $sql = "insert into `pocketwaiter`.`company` (`name`, `email`, `desc`, `website`, `phone`, `address`, `logo`, `logo_type`) values (?, ?, ?, ?, ?, ?, ?, ?);";
+                            $sth = $DBH->prepare($sql);
+
+                            $sth->bindParam(1, $name, PDO::PARAM_INT);
+                            $sth->bindParam(2, $email, PDO::PARAM_INT);
+                            $sth->bindParam(3, $desc, PDO::PARAM_INT);
+                            $sth->bindParam(4, $website, PDO::PARAM_INT);
+                            $sth->bindParam(5, $phone, PDO::PARAM_INT);
+                            $sth->bindParam(6, $address, PDO::PARAM_INT);
+                            $sth->bindParam(7, $bin_data, PDO::PARAM_LOB);
+                            $sth->bindParam(8, $logo_type, PDO::PARAM_INT);
+
+                            $sth->execute();
+                        }
+                    } catch(PDOException $e) {
+                        echo $e;
+                        die;
+                    }
                 }
             }
         }
@@ -188,7 +204,7 @@
                     <label for="logo">Logo:</label>
                     <input type="file" name="logo" accept="image/*">
                     
-                    <button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Register</button>
+                    <button type="submit" name="insert" id="insert" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Register</button>
                     <a href="administrator.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
                 </form>
             </div><!-- /content -->

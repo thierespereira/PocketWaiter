@@ -6,6 +6,7 @@
     <head>
         <title>Checkout</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
         <script src="js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
@@ -124,7 +125,10 @@
                                 echo '</tr>';
                             echo '</tbody>';
                             echo '</table>';
-                            echo '<form action="check_out.php" method="post"><button type="submit" data-transition="slide"  id="confirm" name="confirm" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Confirm Order</button></form>';
+                            echo '<form action="check_out.php" method="post">';
+                            echo '  <span><button type="submit" data-transition="slide"  id="confirm" name="confirm" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Pay</button>';
+                            echo '  <center><div id="paypal-button"></div></center></span>';
+                            echo '</form>';
                         } else {
                             echo '<center>Your cart is empty!</center>';
                         }
@@ -142,5 +146,58 @@
             </div><!-- /footer -->
 
         </div><!-- /page -->
+        <div id="paypal-button"></div>
+
+  <script>
+    paypal.Button.render({
+      env: 'sandbox',
+
+      client: {
+            sandbox:    'Ad-SKOS-SkeJkGTyeMN6xLP9gGKXs9-t3vcDQO0jwh35Sq1BxQXDXkTxeHyWU2buJjN-1qTF-DE5grwY',
+            production: 'AemPGTZfQ-3E0ZZxTT5uNiZvswPyrNEm9x_eHQGeXh7Nu2OssjKeCVKqDFMNKHraiG61sC7Q72g_rLDC'
+        },
+
+      commit: true, // Show a 'Pay Now' button
+
+      style: {
+        color: 'blue',
+        size: 'large',
+        shape: 'rect',
+        tagline: false
+      },
+
+      payment: function(data, actions) {
+          return actions.payment.create({
+                  payment: {
+                      transactions: [
+                          {
+                                  amount: { total: '9.90', currency: 'EUR' }
+                          }
+                      ]
+                  }
+              });
+      },
+
+      onAuthorize: function(data, actions) {
+          return actions.payment.execute().then(function(payment) {
+
+                  alert("The payment is complete!");
+
+              });
+      },
+
+      onCancel: function(data, actions) {
+        /*
+         * Buyer cancelled the payment
+         */
+      },
+
+      onError: function(err) {
+        /*
+         * An error occurred during the transaction
+         */
+      }
+    }, '#paypal-button');
+  </script>
     </body>
 </html>
