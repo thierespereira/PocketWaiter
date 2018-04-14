@@ -79,7 +79,6 @@
                 include('header.php');
             ?>
         <?php
-
         if($_POST) {
             $name = $_POST['name'];
             $email = $_POST['email'];
@@ -88,6 +87,13 @@
             $phone = $_POST['phone'];
             $address = $_POST['address'];
             $error = '';
+            $currfile = $_FILES['logo']['tmp_name'];
+            $filename = $_FILES['logo']['name'];
+            $logo_type = $_FILES['logo']['type'];
+            // ...
+            if($filename != '') {
+                $bin_data = fopen($currfile, 'rb');
+            }
 
             if($name == '') {
                 $error .= 'You must enter a name for the company!<br>';
@@ -126,7 +132,7 @@
                         $error = 'The email is already registered in the system!<br>';
                         $error .= 'Please enter a different email!';
                     } else {
-                    $sql = "insert into `pocketwaiter`.`company` (`name`, `email`, `desc`, `website`, `phone`, `address`) values (?, ?, ?, ?, ?, ?);";
+                    $sql = "insert into `pocketwaiter`.`company` (`name`, `email`, `desc`, `website`, `phone`, `address`, `logo`, `logo_type`) values (?, ?, ?, ?, ?, ?, ?, ?);";
                     $sth = $DBH->prepare($sql);
 
                     $sth->bindParam(1, $name, PDO::PARAM_INT);
@@ -135,7 +141,8 @@
                     $sth->bindParam(4, $website, PDO::PARAM_INT);
                     $sth->bindParam(5, $phone, PDO::PARAM_INT);
                     $sth->bindParam(6, $address, PDO::PARAM_INT);
-                    // $sth->bindParam(7, $logo, PDO::PARAM_INT);
+                    $sth->bindParam(7, $bin_data, PDO::PARAM_LOB);
+                    $sth->bindParam(8, $logo_type, PDO::PARAM_INT);
 
                     $sth->execute();
                 }
@@ -163,7 +170,7 @@
                         }
                     ?>
 
-                <form enctype="multipart/form-data" name="register_company_form" action="register_company.php" method="post" onsubmit="return validateMyForm();">
+                <form enctype="multipart/form-data"  data-ajax="false" name="register_company_form" action="register_company.php" method="post" onsubmit="return validateMyForm();">
                     <label for="name">Name:</label>
                     <input type="text" data-clear-btn="true" name="name" id="name" value="<?php echo isset($_POST['name']) ? $_POST['name'] : '' ?>">
                     <label for="email">Email:</label>
@@ -176,10 +183,11 @@
                     <input type="text" data-clear-btn="true" name="phone" id="phone" value="<?php echo isset($_POST['phone']) ? $_POST['phone'] : '' ?>">
                     <label for="address">Address:</label>
                     <textarea name="address" id="address"><?php echo isset($_POST['address']) ? $_POST['address'] : '' ?></textarea>
-                    <!--
-                    <label for="phone">Logo:</label>
-                    <input type="file" data-clear-btn="true" name="logo" id="logo" value="<?php echo isset($_POST['logo']) ? $_POST['logo'] : '' ?>">
-                    -->
+                    <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
+                    
+                    <label for="logo">Logo:</label>
+                    <input type="file" name="logo" accept="image/*">
+                    
                     <button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Register</button>
                     <a href="administrator.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
                 </form>

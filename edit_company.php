@@ -96,12 +96,15 @@
 
                             if ($sth->rowCount() > 0) {
                                 $rec = $sth->fetch(PDO::FETCH_ASSOC);
+                                $id = $rec['id'];
                                 $name = $rec['name'];
                                 $email = $rec['email'];
                                 $desc = $rec['desc'];
                                 $website = $rec['website'];
                                 $phone = $rec['phone'];
                                 $address = $rec['address'];
+                                $logo = $rec['logo'];
+                                $logo_type = $rec['logo_type'];
                                 if($_POST) {
                                     if($_POST['email'] == '') {
                                          $error .= 'You must enter an email!<br>';
@@ -120,9 +123,17 @@
 
                                     if(!$error) {
                                         try {
+                                            $logoSql = '';
+                                            if($_FILES['logo']['tmp_name']) {
+                                                $currfile = $_FILES['logo']['tmp_name'];
+                                                $filename = $_FILES['logo']['name'];
+                                                $logo_type = $_FILES['logo']['type'];
+                                                $logoSql = " ,`logo` = ?, `logo_type` = ? ";
+                                                $bin_data = fopen($currfile, 'rb');
+                                            }
                                             $sqlUpdate = "";
 
-                                            $sqlUpdate = "update `company` set `name` = ?, `email` = ?, `desc` = ?, `website` = ?, `phone` = ?, `address` = ? where  `id` = ?;";
+                                            $sqlUpdate = "update `company` set `name` = ?, `email` = ?, `desc` = ?, `website` = ?, `phone` = ?, `address` = ? " . $logoSql . " where  `id` = ?;";
                                             $sthUpdate = $DBH->prepare($sqlUpdate);
                                             $sthUpdate->bindParam(1, $_POST['name'], PDO::PARAM_INT);
                                             $sthUpdate->bindParam(2, $_POST['email'], PDO::PARAM_INT);
@@ -130,7 +141,13 @@
                                             $sthUpdate->bindParam(4, $_POST['website'], PDO::PARAM_INT);
                                             $sthUpdate->bindParam(5, $_POST['phone'], PDO::PARAM_INT);
                                             $sthUpdate->bindParam(6, $_POST['address'], PDO::PARAM_INT);
-                                            $sthUpdate->bindParam(7, $user_id, PDO::PARAM_INT);
+                                            if($_FILES['logo']['tmp_name']) {
+                                                $sthUpdate->bindParam(7, $bin_data, PDO::PARAM_LOB);
+                                                $sthUpdate->bindParam(8, $logo_type, PDO::PARAM_INT);
+                                                $sthUpdate->bindParam(9, $user_id, PDO::PARAM_INT);
+                                            } else {
+                                                $sthUpdate->bindParam(7, $user_id, PDO::PARAM_INT);
+                                            }
 
                                             $sthUpdate->execute();
                                             $success = true;
@@ -150,7 +167,7 @@
                                         echo '<br>';
                                         echo '</div><br>';
                                     }
-                                    echo '<form action="edit_company.php?id=' . $user_id . '' . '" method="post" onsubmit="return validateMyForm(this);">';
+                                    echo '<form enctype="multipart/form-data"  data-ajax="false" action="edit_company.php?id=' . $user_id . '' . '" method="post" onsubmit="return validateMyForm(this);">';
                                     echo '<label for="name">Name:</label>';
                                     echo '<input type="text" data-clear-btn="true" name="name" id="name" value="' . $name . '">';
                                     echo '<label for="email">Email:</label>';
@@ -163,6 +180,10 @@
                                     echo '<input type="text" data-clear-btn="true" name="phone" id="phone" value="' . $phone . '">';
                                     echo '<label for="address">Address:</label>';
                                     echo '<textarea name="address" id="address">' . $address . '</textarea>';
+                                    echo '<center><img src="getCompanyImage.php?id=' . $id . '" height="30%" width="30%"/></center>';
+                                    echo '<br>';
+                                    echo '<label for="logo">Logo:</label>';
+                                    echo '<input type="file" name="logo" accept="image/*">';
                                 }
                                     echo '<button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>';
                                     echo '<a href="administrator.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>';

@@ -25,7 +25,8 @@ CREATE TABLE IF NOT EXISTS `company` (
   `website` varchar(50) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `address` varchar(250) DEFAULT NULL,
-  `logo` blob,
+  `logo` LONGBLOB NULL,
+  `logo_type` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
