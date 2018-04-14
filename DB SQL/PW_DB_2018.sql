@@ -131,6 +131,8 @@ CREATE TABLE IF NOT EXISTS `product` (
   `price` decimal(10,2) NOT NULL DEFAULT '0.00',
   `comp_id` int(11) DEFAULT NULL,
   `type` varchar(50) DEFAULT NULL,
+  `product_image` LONGBLOB NULL,
+  `image_type` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_product_company` (`comp_id`),
   CONSTRAINT `FK_product_company` FOREIGN KEY (`comp_id`) REFERENCES `company` (`id`)
