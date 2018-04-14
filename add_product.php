@@ -80,6 +80,12 @@
                         $comp_id = $_SESSION['comp_id'];
                         $registered = '';
                         $error = '';
+                        $currfile = $_FILES['product_image']['tmp_name'];
+                        $filename = $_FILES['product_image']['name'];
+                        $image_type = $_FILES['product_image']['type'];
+                        if($filename != '') {
+                            $bin_data = fopen($currfile, 'rb');
+                        }
 
                         if($name == '') {
                             $error .= 'You must enter a name!<br>';
@@ -105,7 +111,7 @@
                             try {
                                 include('database.php');
 
-                                $sql = "insert into `product` (`name`, `description`, `price`, `comp_id`, `type`) values (?,?,?,?,?);";
+                                $sql = "insert into `product` (`name`, `description`, `price`, `comp_id`, `type`, `product_image`, `image_type`) values (?,?,?,?,?,?,?);";
                                 $sth = $DBH->prepare($sql);
 
                                 $sth->bindParam(1,$name, PDO::PARAM_INT);
@@ -113,6 +119,8 @@
                                 $sth->bindParam(3,$price, PDO::PARAM_INT);
                                 $sth->bindParam(4,$comp_id, PDO::PARAM_INT);
                                 $sth->bindParam(5,$type, PDO::PARAM_INT);
+                                $sth->bindParam(6,$bin_data, PDO::PARAM_LOB);
+                                $sth->bindParam(7,$image_type, PDO::PARAM_INT);
                                 $sth->execute();
 
                             } catch(PDOException $e) {
@@ -137,7 +145,7 @@
                     }
                 ?>
 
-                <form action="add_product.php" method="post" onsubmit="return validateMyForm(this);">
+                <form enctype="multipart/form-data"  data-ajax="false" action="add_product.php" method="post" onsubmit="return validateMyForm(this);">
                     <label for="name">Name:</label>
                     <input type="text" data-clear-btn="true" name="name" id="name" value="<?php echo (isset($_POST['name']) && !$registered) ? $_POST['name'] : '' ?>">
                     <label for="description">Description:</label>
@@ -155,6 +163,10 @@
                         echo '</select>';
                     echo '</div>';
                     ?>
+                    <br>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
+                    <label for="product_image">Image:</label>
+                    <input type="file" name="product_image" accept="image/*">
                     <button type="submit" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>
                     <a href="manage_product.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
                 </form>

@@ -3,16 +3,16 @@
 
   include('database.php');
   // do some validation here to ensure id is safe
-  $sql = "SELECT logo, logo_type FROM company WHERE id=" . $id;
+  $sql = "SELECT product_image, image_type FROM product WHERE id=" . $id;
   $sth = $DBH->prepare($sql);
   $sth->execute();
   if ($sth->rowCount() > 0) {
     $row = $sth->fetch(PDO::FETCH_ASSOC);
-    if($row['logo']) {
-        header("Content-type: " . $row['logo_type']);
-        echo $row['logo'];
+    if($row['product_image']) {
+      header("Content-type: " . $row['image_type']);
+      echo $row['product_image'];
     } else {
-        $filename = "images/your_logo_here.png";
+        $filename = "images/your-product-here.png";
         $fp = fopen($filename, "r");
         $data = fread($fp, filesize($filename));
         fclose($fp);      
