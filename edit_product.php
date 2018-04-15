@@ -15,37 +15,26 @@
                 $("#errorMessage").html('');
                 var ret = true;
 
-                // if(!form.id.value.trim()) {
-                //     $('#errorMessage').append('You must enter an ID!<br>');
-                //     ret = false;
-                // } else {
-                //     var pr = number(form.id.value);
-                //     if(pr <= 0) {
-                //        $('#errorMessage').append('Not a valid ID!<br>');
-                //        ret = false;
-                //     }
-                // }
+                if(!form.name.value.trim()) {
+                    $('#errorMessage').append('You must enter a name!<br>');
+                    ret = false;
+                }
 
-                // if(!form.name.value.trim()) {
-                //     $('#errorMessage').append('You must enter a name!<br>');
-                //     ret = false;
-                // }
+                if(!form.description.value.trim()) {
+                    $('#errorMessage').append('You must enter a description!<br>');
+                    ret = false;
+                }
 
-                // if(!form.description.value.trim()) {
-                //     $('#errorMessage').append('You must enter a description!<br>');
-                //     ret = false;
-                // }
-
-                // if(!form.price.value.trim()) {
-                //     $('#errorMessage').append('You must enter a price!<br>');
-                //     ret = false;
-                // } else {
-                //     var pr = number(form.price.value);
-                //     if(pr <= 0) {
-                //        $('#errorMessage').append('Not a valid price!<br>');
-                //        ret = false;
-                //     }
-                // }
+                if(!form.price.value.trim()) {
+                    $('#errorMessage').append('You must enter a price!<br>');
+                    ret = false;
+                } else {
+                    var pr = number(form.price.value);
+                    if(pr <= 0) {
+                       $('#errorMessage').append('Not a valid price!<br>');
+                       ret = false;
+                    }
+                }
 
                 return ret;
             }
@@ -81,18 +70,6 @@
                         $description = $_POST['description'];
                         $price = $_POST['price'];
                         $error = '';
-                        $registered = false;                        
-                        if($id == '') {
-                            $error .= 'You must enter an ID!<br>';
-                        } else {
-                            if(!is_numeric($id)) {
-                                $error .= 'Not a valid ID!<br>';
-                            } else {
-                                if($id <= 0) {
-                                    $error .= 'Not a valid ID!<br>';
-                                }
-                            }
-                        }
 
                         if($name == '') {
                             $error .= 'You must enter a name!<br>';
@@ -125,13 +102,13 @@
                                     $bin_data = fopen($currfile, 'rb');
                                 }
 
-
                                 $sql = "update `product` set `name` = ?, `description`= ?, `price`= ? " . $logoSql . " where `id`= ?;";
                                 $sth = $DBH->prepare($sql);
 
                                 $sth->bindParam(1,$name, PDO::PARAM_INT);
                                 $sth->bindParam(2,$description, PDO::PARAM_INT);
                                 $sth->bindParam(3,$price, PDO::PARAM_INT);
+
                                 if($_FILES['product_image']['tmp_name']) {
                                     $sth->bindParam(4,$bin_data, PDO::PARAM_LOB);
                                     $sth->bindParam(5,$image_type, PDO::PARAM_INT);
@@ -144,7 +121,6 @@
                                 $registered = true;
                             } catch(PDOException $e) {
                                 $error .= $e;
-                                $registered = false;
                             }
                         }
 
@@ -154,15 +130,7 @@
                             echo '<br>';
                             echo '</div><br>';
                         }
-
-                        if(!empty($registered)) {
-                            echo '<div id="message" style="background-color:lightgreen;">';
-                            echo 'Product updated successfully!<br>';
-                            echo 'Please click <a href="staffadmin.php" data-transition="slide" >here</a> to view a list of products.';
-                            echo '<br>';
-                            echo '</div><br>';
-                            die;
-                        }
+                        
                     } else {
                         if(isset($_GET['id'])) {
                             $sql = "select * from product where id = ?";
@@ -192,7 +160,6 @@
                     <textarea name="description" id="description"><?php echo isset($description) ? $description : '' ?></textarea>
                     <label for="price">Price:</label>
                     <input type="text" data-clear-btn="true" name="price" id="price" value="<?php echo isset($price) ? $price : '' ?>">
-
                     <?php
                         echo '<center><img src="getProductImage.php?id=' . $id . '"></center>';
                         echo '<input type="hidden" name="MAX_FILE_SIZE" value="2097152" />';

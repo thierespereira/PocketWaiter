@@ -66,23 +66,6 @@
                     }
                     return ret;
                 }
-
-                $(document).ready(function(){
-                    $('#insert').click(function(){
-                        var image_name = $('#image').val();
-                        if(image_name == ''){
-                            alert("Please select an image.");
-                            return false;
-                        } else {
-                            var extention = $('#image').val().split('.').pop().toLowercase();
-                            if (jQuery.inArray(extension, ['gif', 'pgn', 'jpg', 'jpeg']) == -1) {
-                                alert("Invalid image file!");
-                                $('#image').val('');
-                                return false;
-                            }
-                        }
-                    });
-                });
             </script>
 
             <?php
@@ -200,10 +183,10 @@
                     <label for="address">Address:</label>
                     <textarea name="address" id="address"><?php echo isset($_POST['address']) ? $_POST['address'] : '' ?></textarea>
                     <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
-                    
+
                     <label for="logo">Logo:</label>
                     <input type="file" name="logo" accept="image/*">
-                    
+
                     <button type="submit" name="insert" id="insert" data-transition="slide" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Register</button>
                     <a href="administrator.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
                 </form>

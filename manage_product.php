@@ -43,7 +43,7 @@
                         if ($sth->rowCount() > 0) {
                             echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search products..." data-inset="true"> ';
                             while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-                                echo '<li data-icon="edit"><a href="edit_product.php?id=' . $row['id'] . '"><img src="getProductImage.php?id=' . $row['id'] . '" width="80px" height="80px">' .  $row['id'] . ' - ' . $row['name'] . '</a></li>';
+                                echo '<li data-icon="edit"><a href="edit_product.php?id=' . $row['id'] . '"><img src="getProductImage.php?id=' . $row['id'] . '" width="80px" height="80px">' . $row['name'] . '</a></li>';
                             }
                             echo '</ul>';
                         } else {

@@ -48,6 +48,7 @@
 
                 ?>
                 <a href="check_out.php" class="ui-btn ui-icon-shop ui-btn-icon-left ui-btn-b">Checkout</a>
+                <br>
                 <div>
                     <b><center>Mains</center></b>
                     <?php
@@ -70,7 +71,7 @@
                             if ($sth->rowCount() > 0) {
                                 echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search products..." data-inset="true"> ';
                                 while ($row = $sth->fetch(PDO::FETCH_ASSOC))  {
-                                    echo '<li><a href="view_menu_item.php?id=' . $row['id'] . '&code=' . $code . '" data-transition="slide">' . $row['name'] . ' - €' . $row['price'] . '</a></li>';
+                                    echo '<li><a href="view_menu_item.php?id=' . $row['id'] . '&code=' . $code . '" data-transition="slide"><img src="getProductImage.php?id=' . $row['id'] . '" width="80px" height="80px">' . $row['name'] . ' - €' . $row['price'] . '</a></li>';
                                 }
                                 echo '</ul>';
                             } else {
@@ -82,7 +83,7 @@
                         }
                     ?>
                 </div>
-
+                <br>
                 <div>
                     <b><center>Sides</center></b>
                     <?php
@@ -105,7 +106,7 @@
                             if ($sth->rowCount() > 0) {
                                 echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search products..." data-inset="true"> ';
                                 while ($row = $sth->fetch(PDO::FETCH_ASSOC))  {
-                                    echo '<li><a href="view_menu_item.php?id=' . $row['id'] . '&code=' . $code . '" data-transition="slide">' . $row['name'] . ' - €' . $row['price'] . '</a></li>';
+                                    echo '<li><a href="view_menu_item.php?id=' . $row['id'] . '&code=' . $code . '" data-transition="slide"><img src="getProductImage.php?id=' . $row['id'] . '" width="80px" height="80px">' . $row['name'] . ' - €' . $row['price'] . '</a></li>';
                                 }
                                 echo '</ul>';
                             } else {
@@ -117,7 +118,7 @@
                         }
                     ?>
                 </div>
-
+                <br>
                 <div>
                     <b><center>Drinks</center></b>
                     <?php
@@ -140,7 +141,7 @@
                             if ($sth->rowCount() > 0) {
                                 echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search products..." data-inset="true"> ';
                                 while ($row = $sth->fetch(PDO::FETCH_ASSOC))  {
-                                    echo '<li><a href="view_menu_item.php?id=' . $row['id'] . '&code=' . $code . '" data-transition="slide">' . $row['name'] . ' - €' . $row['price'] . '</a></li>';
+                                    echo '<li><a href="view_menu_item.php?id=' . $row['id'] . '&code=' . $code . '" data-transition="slide"><img src="getProductImage.php?id=' . $row['id'] . '" width="80px" height="80px">' . $row['name'] . ' - €' . $row['price'] . '</a></li>';
                                 }
                                 echo '</ul>';
                             } else {
@@ -152,7 +153,7 @@
                         }
                     ?>
                 </div>
-
+                <br>
                 <div>
                     <b><center>Desserts</center></b>
                     <?php
@@ -177,7 +178,7 @@
                             if ($sth->rowCount() > 0) {
                                 echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search products..." data-inset="true"> ';
                                 while ($row = $sth->fetch(PDO::FETCH_ASSOC))  {
-                                    echo '<li><a href="view_menu_item.php?id=' . $row['id'] . '&code=' . $code . '" data-transition="slide">' . $row['name'] . ' - €' . $row['price'] . '</a></li>';
+                                    echo '<li><a href="view_menu_item.php?id=' . $row['id'] . '&code=' . $code . '" data-transition="slide"><img src="getProductImage.php?id=' . $row['id'] . '" width="80px" height="80px">' . $row['name'] . ' - €' . $row['price'] . '</a></li>';
                                 }
                                 echo '</ul>';
                             } else {
@@ -203,7 +204,11 @@
                 ?>
             </div>
             <div data-role="footer">
-                <center><h5 style="color:#B0B0B0;">This web application was developed by PVP.</h5></center>
+                <center>
+                    <h5 style="color:#B0B0B0;">This web application was developed by PVP.
+                    <br>
+                    Icons made by <a href="https://www.flaticon.com/authors/freepik">freepik</a> from <a href="www.flaticon.com">www.flaticon.com</a></h5>
+                </center>
             </div><!-- /footer -->
 
         </div><!-- /page -->
