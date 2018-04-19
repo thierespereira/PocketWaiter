@@ -25,34 +25,70 @@
             <div role="main" class="ui-content">
                 <a href="add_table.php" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b">Add Table</a>
                 <a href="staffadmin.php" data-transition="slide" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>
-                <?php
-                    try {
-                        //Create db connection
-                        include('database.php');
+                <br>
+                <div>
+                    <b><center>Tables Online</center></b>
+                    <?php
+                        try {
+                            //Create db connection
+                            include('database.php');
 
-                        $comp_id = $_SESSION['comp_id'];
+                            $comp_id = $_SESSION['comp_id'];
 
-                        $sql = "select * from comptable where comp_id = ?";
-                        $sth = $DBH->prepare($sql);
+                            $sql = "select * from comptable where comp_id = ? and status = 'online'";
+                            $sth = $DBH->prepare($sql);
 
-                        $sth->bindParam(1,$comp_id, PDO::PARAM_INT);
+                            $sth->bindParam(1,$comp_id, PDO::PARAM_INT);
 
-                        $sth->execute();
+                            $sth->execute();
 
-                        if ($sth->rowCount() > 0) {
-                            echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search tables..." data-inset="true"> ';
-                            while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-                                echo '<li data-icon="edit">' .  $row['code'] . '</li>';
+                            if ($sth->rowCount() > 0) {
+                                echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search tables..." data-inset="true"> ';
+                                while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+                                    echo '<li data-icon="edit"><a href="edit_table.php?id=' . $row['id'] . '">' . $row['code'] . '</a></li>';
+                                }
+                                echo '</ul>';
+                            } else {
+                                $error = 'No tables created.';
                             }
-                            echo '</ul>';
-                        } else {
-                            $error = 'No tables.';
+                        } catch(PDOException $e) {
+                            $error .= $e;
+                            echo $e;
                         }
-                    } catch(PDOException $e) {
-                        $error .= $e;
-                        echo $e;
-                    }
-                ?>
+                    ?>
+                </div>
+                <br>
+                <div>
+                    <b><center>Tables Offline</center></b>
+                    <?php
+                        try {
+                            //Create db connection
+                            include('database.php');
+
+                            $comp_id = $_SESSION['comp_id'];
+
+                            $sql = "select * from comptable where comp_id = ? and status = 'offline'";
+                            $sth = $DBH->prepare($sql);
+
+                            $sth->bindParam(1,$comp_id, PDO::PARAM_INT);
+
+                            $sth->execute();
+
+                            if ($sth->rowCount() > 0) {
+                                echo '<ul data-role="listview" data-filter="true" data-filter-placeholder="Search tables..." data-inset="true"> ';
+                                while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+                                    echo '<li data-icon="edit"><a href="edit_table.php?id=' . $row['id'] . '">' . $row['code'] . '</a></li>';
+                                }
+                                echo '</ul>';
+                            } else {
+                                $error = 'No tables offline.';
+                            }
+                        } catch(PDOException $e) {
+                            $error .= $e;
+                            echo $e;
+                        }
+                    ?>
+                </div>
             </div><!-- /content -->
 
             <div data-role="footer">
