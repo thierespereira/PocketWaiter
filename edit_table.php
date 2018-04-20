@@ -10,39 +10,41 @@
         <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
         <script src="js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript" language="javascript">
-
-            function validateMyForm(form) {
-                $("#errorMessage").html('');
-                var ret = true;
-
-                if(!form.name.value.trim()) {
-                    $('#errorMessage').append('You must enter a name!<br>');
-                    ret = false;
-                }
-
-                if(!form.description.value.trim()) {
-                    $('#errorMessage').append('You must enter a description!<br>');
-                    ret = false;
-                }
-
-                if(!form.price.value.trim()) {
-                    $('#errorMessage').append('You must enter a price!<br>');
-                    ret = false;
-                } else {
-                    var pr = number(form.price.value);
-                    if(pr <= 0) {
-                       $('#errorMessage').append('Not a valid price!<br>');
-                       ret = false;
-                    }
-                }
-
-                return ret;
-            }
-        </script>
     </head>
     <body>
         <div data-role="page" style="width=100%; margin:0;" data-theme="b">
+
+            <script type="text/javascript" language="javascript">
+
+                function validateMyForm() {
+                    var form = document.forms['edit_table_form'];
+                    $("#errorMessage").html('');
+                    var ret = true;
+
+                    if(!form['name'].value.trim()) {
+                        $('#errorMessage').append('You must enter a name!<br>');
+                        ret = false;
+                    }
+
+                    if(!form['description'].value.trim()) {
+                        $('#errorMessage').append('You must enter a description!<br>');
+                        ret = false;
+                    }
+
+                    if(!form['price'].value.trim()) {
+                        $('#errorMessage').append('You must enter a price!<br>');
+                        ret = false;
+                    } else {
+                        var pr = number(form['price'].value);
+                        if(pr <= 0) {
+                           $('#errorMessage').append('Not a valid price!<br>');
+                           ret = false;
+                        }
+                    }
+
+                    return ret;
+                }
+            </script>
 
             <?php
                 include('header.php');
@@ -125,7 +127,7 @@
                     }
                 ?>
 
-                <form enctype="multipart/form-data"  data-ajax="false" action="edit_table.php?id=<?php echo $_GET['id'] ?>"  method="post" onsubmit="return validateMyForm(this);">
+                <form enctype="multipart/form-data" name="edit_table_form" data-ajax="false" action="edit_table.php?id=<?php echo $_GET['id'] ?>"  method="post" onsubmit="return validateMyForm();">
                     <label for="id">ID:</label>
                     <input type="text" name="id" id="id" value="<?php echo isset($id) ? $id : '' ?>" readonly>
                     <label for="code">Code:</label>

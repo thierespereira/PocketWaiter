@@ -10,21 +10,23 @@
         <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
         <script src="js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
-        <script>
-            function validateMyForm(form) {
-                $("#erroMessage").html('');
-                var ret = true;
-
-                if(!form.code.value.trim()) {
-                    $('#erroMessage').append('Please enter a table code.');
-                    ret = false;
-                }
-                return ret;
-            }
-        </script>
     </head>
     <body>
         <div data-role="page" style="width=100%; margin:0;" data-theme="b">
+
+            <script type="text/javascript" language="javascript">
+                function validateMyForm() {
+                    var form = document.forms['scan_code_form'];
+                    $("#errorMessage").html('');
+                    var ret = true;
+
+                    if(!form['code'].value.trim()) {
+                        $('#errorMessage').append('Please enter a table code.');
+                        ret = false;
+                    }
+                    return ret;
+                }
+            </script>
 
             <?php
                 include('header.php');
@@ -67,7 +69,7 @@
             ?>
 
             <div role="main" class="ui-content">
-                <div id="erroMessage" style="color:red; background-color:#FFE4E4;">
+                <div id="errorMessage" style="color:red; background-color:#FFE4E4;">
                 </div>
                 <?php
                     if($_POST) {
@@ -79,7 +81,7 @@
                         }
                     }
                 ?>
-                <form action="index.php" method="post" onsubmit="return validateMyForm(this);">
+                <form action="index.php" name="scan_code_form" method="post" onsubmit="return validateMyForm();">
                     <center><label for="code">Enter table code</label></center>
                     <input type="text" data-clear-btn="true" name="code" id="code" value="<?php echo isset($_POST['code']) ? $_POST['code'] : '' ?>">
                     <button type="submit" data-transition="slide" class="ui-btn ui-btn-b" >OK</button>

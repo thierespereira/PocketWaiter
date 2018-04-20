@@ -10,40 +10,42 @@
         <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
         <script src="js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript" language="javascript">
-
-            function validateMyForm(form) {
-                $("#errorMessage").html('');
-                var ret = true;
-                var re_mail = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z])+$/;
-
-                if (!form.email.value.trim()) {
-                    $("#errorMessage").append('You must enter an email!<br>');
-                    ret = false;
-                } else {
-                    if (!re_mail.test(email.value.trim())) {
-                        $("#errorMessage").append('Not a valid email address!<br>');
-                        ret = false;
-                    }
-                }
-
-                if(!form.phone.value.trim()) {
-                    $('#errorMessage').append('You must enter a phone number!<br>');
-                    ret = false;
-                }
-
-                if(!form.address.value.trim()) {
-                     $('#errorMessage').append('You must enter an address!<br>');
-                    ret = false;
-                }
-                return ret;
-            }
-
-        </script>
     </head>
     <body>
 
         <div data-role="page" style="width=100%; margin:0;" data-theme="b">
+
+            <script type="text/javascript" language="javascript">
+
+                function validateMyForm() {
+                    var form = document.forms['edit_user_form'];
+                    $("#errorMessage").html('');
+                    var ret = true;
+                    var re_mail = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z])+$/;
+
+                    if (!form['email'].value.trim()) {
+                        $("#errorMessage").append('You must enter an email!<br>');
+                        ret = false;
+                    } else {
+                        if (!re_mail.test(form['email'].value.trim())) {
+                            $("#errorMessage").append('Not a valid email address!<br>');
+                            ret = false;
+                        }
+                    }
+
+                    if(!form['phone'].value.trim()) {
+                        $('#errorMessage').append('You must enter a phone number!<br>');
+                        ret = false;
+                    }
+
+                    if(!form['address'].value.trim()) {
+                         $('#errorMessage').append('You must enter an address!<br>');
+                        ret = false;
+                    }
+                    return ret;
+                }
+
+            </script>
 
             <?php
                 include('header.php');
@@ -170,7 +172,7 @@
                                         echo '<br>';
                                         echo '</div><br>';
                                     }
-                                    echo '<form action="edit_user.php?id=' . $user_id . '' . '" method="post" onsubmit="return validateMyForm(this);">';
+                                    echo '<form action="edit_user.php?id=' . $user_id . '' . '" method="post" name="edit_user_form" onsubmit="return validateMyForm();">';
                                     echo '<label for="email">Email:</label>';
                                     echo '<input type="text" data-clear-btn="true" name="email" id="email" value="' . $email . '">';
                                     echo '<label for="phone">Phone number:</label>';

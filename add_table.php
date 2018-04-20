@@ -10,31 +10,30 @@
         <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
         <script src="js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
-
-        <script type="text/javascript" language="javascript">
-
-            function validateMyForm(form) {
-                $("#errorMessage").html('');
-                var ret = true;
-
-                if(!form.table_code.value.trim()) {
-                    $('#errorMessage').append('You must enter a code!<br>');
-                    ret = false;
-                } else {
-                    if(form.table_code.value.trim().length > 50) {
-                        $('#errorMessage').append('The code is too long. Max 50 characteres!<br>');
-                        ret = false;
-                    }
-                }
-
-                 return ret;
-            }
-
-        </script>
-
 	</head>
     <body>
         <div data-role="page" style="width=100%; margin:0;" data-theme="b">
+            <script type="text/javascript" language="javascript">
+
+                function validateMyForm() {
+                    var form = document.forms['add_table_form'];
+                    $("#errorMessage").html('');
+                    var ret = true;
+
+                    if(!form['table_code'].value.trim()) {
+                        $('#errorMessage').append('You must enter a code!<br>');
+                        ret = false;
+                    } else {
+                        if(form['table_code'].value.trim().length > 50) {
+                            $('#errorMessage').append('The code is too long. Max 50 characteres!<br>');
+                            ret = false;
+                        }
+                    }
+
+                     return ret;
+                }
+
+            </script>
 
             <?php
                 include('header.php');
@@ -80,6 +79,8 @@
 	                                $sth->bindParam(1,$table_code, PDO::PARAM_INT);
 	                                $sth->bindParam(2,$comp_id, PDO::PARAM_INT);
 	                                $sth->execute();
+
+                                    $registered = true;
                             	}
                             } catch(PDOException $e) {
                                 $error .= $e;
@@ -91,7 +92,7 @@
                             echo $error;
                             echo '<br>';
                             echo '</div><br>';
-                        } else {
+                        } else if($registered) {
                             echo '<div id="message" style="background-color:lightgreen;">';
                             echo 'Table added successfully.<br>';
                             echo 'Please click <a href="manage_table.php" data-transition="slide" >here</a> to view a list of tables.';
@@ -101,7 +102,7 @@
                     }
                 ?>
 
-                <form action="add_table.php" method="post" onsubmit="return validateMyForm(this);">
+                <form action="add_table.php" name="add_table_form" method="post" onsubmit="return validateMyForm();">
                     <label for="table_code">Code:</label>
                     <input type="text" data-clear-btn="true" name="table_code" id="table_code" value="<?php echo (isset($_POST['table_code']) && !$registered) ? $_POST['table_code'] : '' ?>">
                     <button type="submit" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>

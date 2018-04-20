@@ -10,49 +10,50 @@
         <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
         <script src="js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript" language="javascript">
-
-            function validateMyForm(form) {
-                $("#errorMessage").html('');
-                var ret = true;
-
-                if(!form.name.value.trim()) {
-                    $('#errorMessage').append('You must enter a name!<br>');
-                    ret = false;
-                } else {
-                    if(form.name.value.trim().length > 70) {
-                        $('#errorMessage').append('The name is too long. Max 70 characteres!<br>');
-                        ret = false;
-                    }
-                }
-
-                if(!form.description.value.trim()) {
-                    $('#errorMessage').append('You must enter a description!<br>');
-                    ret = false;
-                } else {
-                    if(form.description.value.trim().length > 250) {
-                        $('#errorMessage').append('The description is too long - Max 250 characteres!<br>');
-                        ret = false;
-                    }
-                }
-
-                if(!form.price.value.trim()) {
-                    $('#errorMessage').append('You must enter a price!<br>');
-                    ret = false;
-                } else {
-                    var pr = number(form.price.value);
-                    if(pr <= 0) {
-                       $('#errorMessage').append('Not a valid price!<br>');
-                       ret = false;
-                    }
-                }
-
-                return ret;
-            }
-        </script>
     </head>
     <body>
         <div data-role="page" style="width=100%; margin:0;" data-theme="b">
+            <script type="text/javascript" language="javascript">
+
+                function validateMyForm() {
+                    var form = document.forms['add_product_form'];
+                    $("#errorMessage").html('');
+                    var ret = true;
+
+                    if(!form['name'].value.trim()) {
+                        $('#errorMessage').append('You must enter a name!<br>');
+                        ret = false;
+                    } else {
+                        if(form['name'].value.trim().length > 70) {
+                            $('#errorMessage').append('The name is too long. Max 70 characteres!<br>');
+                            ret = false;
+                        }
+                    }
+
+                    if(!form['description'].value.trim()) {
+                        $('#errorMessage').append('You must enter a description!<br>');
+                        ret = false;
+                    } else {
+                        if(form['description'].value.trim().length > 250) {
+                            $('#errorMessage').append('The description is too long - Max 250 characteres!<br>');
+                            ret = false;
+                        }
+                    }
+
+                    if(!form['price'].value.trim()) {
+                        $('#errorMessage').append('You must enter a price!<br>');
+                        ret = false;
+                    } else {
+                        var pr = number(form['price'].value);
+                        if(pr <= 0) {
+                           $('#errorMessage').append('Not a valid price!<br>');
+                           ret = false;
+                        }
+                    }
+
+                    return ret;
+                }
+            </script>
 
             <?php
                 include('header.php');
@@ -124,6 +125,8 @@
                                 $sth->bindParam(7,$image_type, PDO::PARAM_INT);
                                 $sth->execute();
 
+                                $registered = true;
+
                             } catch(PDOException $e) {
                                 $error .= $e;
                             }
@@ -146,7 +149,7 @@
                     }
                 ?>
 
-                <form enctype="multipart/form-data"  data-ajax="false" action="add_product.php" method="post" onsubmit="return validateMyForm(this);">
+                <form enctype="multipart/form-data"  name="add_product_form" data-ajax="false" action="add_product.php" method="post" onsubmit="return validateMyForm(this);">
                     <label for="name">Name:</label>
                     <input type="text" data-clear-btn="true" name="name" id="name" value="<?php echo (isset($_POST['name']) && !$registered) ? $_POST['name'] : '' ?>">
                     <label for="description">Description:</label>

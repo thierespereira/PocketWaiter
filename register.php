@@ -10,73 +10,76 @@
         <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
         <script src="js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript" language="javascript">
-
-            function validateMyForm(form) {
-                $("#errorMessage").html('');
-                var ret = true;
-                var re_mail = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z])+$/;
-
-                if (!form.email.value.trim()) {
-                    $("#errorMessage").append('You must enter an email!<br>');
-                    ret = false;
-                } else {
-                    if (!re_mail.test(form.email.value.trim())) {
-                        $("#errorMessage").append('Not a valid email address!<br>');
-                        ret = false;
-                    } else {
-                        if(form.email.value.trim().length > 100) {
-                            $("#errorMessage").append('Email - Maximum 100 characteres!<br>');
-                            ret = false;
-                        }
-                    }
-                }
-
-                if(!form.password.value.trim()) {
-                    $('#errorMessage').append('You must enter a password!<br>');
-                    ret = false;
-                } else {
-                    if(form.password.value.trim().length < 6) {
-                        $('#errorMessage').append('The password is too short - Minimum 6 characteres!<br>');
-                        ret = false;
-                    }
-
-                    if(!form.rePassword.value.trim()) {
-                        $('#errorMessage').append('You must fill in "re-enter password" field!<br>');
-                        ret = false;
-                    } else {
-                        if(form.password.value.trim() != form.rePassword.value.trim()) {
-                            $('#errorMessage').append('The password is not a match!<br>');
-                            ret = false;
-                        }
-                    }
-                }
-
-                if(!form.phone.value.trim()) {
-                    $('#errorMessage').append('You must enter a phone number!<br>');
-                    ret = false;
-                } else {
-                    if(form.phone.value.trim().length > 20) {
-                        $('#errorMessage').append('The phone number is too long - Maximum 20 characteres!<br>');
-                        ret = false;
-                    }
-                }
-
-                if(!form.address.value.trim()) {
-                     $('#errorMessage').append('You must enter an address!<br>');
-                    ret = false;
-                } else {
-                    if(form.address.value.trim().length > 200) {
-                        $('#errorMessage').append('The address is too long - Maximum 150 characteres!<br>');
-                        ret = false;
-                    }
-                }
-                return ret;
-            }
-        </script>
     </head>
     <body>
         <div data-role="page" style="width=100%; margin:0;" data-theme="b">
+
+            <script type="text/javascript" language="javascript">
+
+                function validateMyForm() {
+                    var form = document.forms['register_form'];
+                    $("#errorMessage").html('');
+                    var ret = true;
+                    var re_mail = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z])+$/;
+
+                    if (!form['email'].value.trim()) {
+                        $("#errorMessage").append('You must enter an email!<br>');
+                        ret = false;
+                    } else {
+                        if (!re_mail.test(form['email'].value.trim())) {
+                            $("#errorMessage").append('Not a valid email address!<br>');
+                            ret = false;
+                        } else {
+                            if(form['email'].value.trim().length > 100) {
+                                $("#errorMessage").append('Email - Maximum 100 characteres!<br>');
+                                ret = false;
+                            }
+                        }
+                    }
+
+                    if(!form['password'].value.trim()) {
+                        $('#errorMessage').append('You must enter a password!<br>');
+                        ret = false;
+                    } else {
+                        if(form['password'].value.trim().length < 6) {
+                            $('#errorMessage').append('The password is too short - Minimum 6 characteres!<br>');
+                            ret = false;
+                        }
+
+                        if(!form['rePassword'].value.trim()) {
+                            $('#errorMessage').append('You must fill in "re-enter password" field!<br>');
+                            ret = false;
+                        } else {
+                            if(form['password'].value.trim() != form['rePassword'].value.trim()) {
+                                $('#errorMessage').append('The password is not a match!<br>');
+                                ret = false;
+                            }
+                        }
+                    }
+
+                    if(!form['phone'].value.trim()) {
+                        $('#errorMessage').append('You must enter a phone number!<br>');
+                        ret = false;
+                    } else {
+                        if(form['phone'].value.trim().length > 20) {
+                            $('#errorMessage').append('The phone number is too long - Maximum 20 characteres!<br>');
+                            ret = false;
+                        }
+                    }
+
+                    if(!form['address'].value.trim()) {
+                         $('#errorMessage').append('You must enter an address!<br>');
+                        ret = false;
+                    } else {
+                        if(form['address'].value.trim().length > 200) {
+                            $('#errorMessage').append('The address is too long - Maximum 150 characteres!<br>');
+                            ret = false;
+                        }
+                    }
+                    return ret;
+                }
+            </script>
+
             <?php
                 include('header.php');
             ?>
@@ -193,7 +196,7 @@
                         }
                     ?>
 
-                <form action="register.php" method="post" onsubmit="return validateMyForm(this)">
+                <form action="register.php" name="register_form" method="post" onsubmit="return validateMyForm()">
                     <label for="email">Email:</label>
                     <input type="text" data-clear-btn="true" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
                     <label for="password">Password:</label>

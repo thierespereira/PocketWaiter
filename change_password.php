@@ -10,44 +10,47 @@
         <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
         <script src="js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript" language="javascript">
-
-            function validateMyForm(form) {
-                $("#errorMessage").html('');
-                var ret = true;
-                var re_mail = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z])+$/;
-
-                if (!form.currentPassword.value.trim()) {
-                    $("#errorMessage").append('Enter your current password.<br>');
-                    ret = false;
-                }
-
-                if(!form.password.value.trim()) {
-                    $('#errorMessage').append('Enter a password.<br>');
-                    ret = false;
-                } else {
-                    if(form.password.value.trim().length < 6) {
-                        $('#errorMessage').append('The password is too short - Minimum 6 characteres!<br>');
-                        ret = false;
-                    }
-
-                    if(!form.rePassword.value.trim()) {
-                        $('#errorMessage').append('You must fill in the "re-enter password" field.<br>');
-                        ret = false;
-                    } else {
-                        if(form.password.value.trim() != form.rePassword.value.trim()) {
-                            $('#errorMessage').append('The password is not a match.<br>');
-                            ret = false;
-                        }
-                    }
-                }
-                return ret;
-            }
-        </script>
     </head>
     <body>
 
         <div data-role="page" style="width=100%; margin:0;" data-theme="b">
+
+            <script type="text/javascript" language="javascript">
+
+                function validateMyForm() {
+                    var form = document.forms['change_password_form'];
+                    $("#errorMessage").html('');
+                    var ret = true;
+                    var re_mail = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z])+$/;
+
+                    if (!form['currentPassword'].value.trim()) {
+                        $("#errorMessage").append('Enter your current password.<br>');
+                        ret = false;
+                    }
+
+                    if(!form['password'].value.trim()) {
+                        $('#errorMessage').append('Enter a password.<br>');
+                        ret = false;
+                    } else {
+                        if(form['password'].value.trim().length < 6) {
+                            $('#errorMessage').append('The password is too short - Minimum 6 characteres!<br>');
+                            ret = false;
+                        }
+
+                        if(!form['rePassword'].value.trim()) {
+                            $('#errorMessage').append('You must fill in the "re-enter password" field.<br>');
+                            ret = false;
+                        } else {
+                            if(form['password'].value.trim() != form['rePassword'].value.trim()) {
+                                $('#errorMessage').append('The password is not a match.<br>');
+                                ret = false;
+                            }
+                        }
+                    }
+                    return ret;
+                }
+            </script>
+
             <?php
                 include('header.php');
 
@@ -143,7 +146,7 @@
                         }
                     }
                 ?>
-                <form action="change_password.php" method="post" onsubmit="return validateMyForm(this);">
+                <form action="change_password.php" name="change_password_form" method="post" onsubmit="return validateMyForm(this);">
                     <label for="currentPassword">Current Password:</label>
                     <input type="Password" data-clear-btn="true" name="currentPassword" id="currentPassword" value="" autocomplete="off">
                     <label for="password">Password:</label>
