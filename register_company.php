@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Register</title>
+        <title>Register Company</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
         <script src="js/jquery-1.11.1.min.js"></script>
@@ -130,7 +130,7 @@
                             $error = 'The email is already registered in the system!<br>';
                             $error .= 'Please enter a different email!';
                         } else {
-                            $sql = "insert into `pocketwaiter`.`company` (`name`, `email`, `desc`, `website`, `phone`, `address`, `logo`, `logo_type`) values (?, ?, ?, ?, ?, ?, ?, ?);";
+                            $sql = "insert into `company` (`name`, `email`, `desc`, `website`, `phone`, `address`, `logo`, `logo_type`) values (?, ?, ?, ?, ?, ?, ?, ?);";
                             $sth = $DBH->prepare($sql);
 
                             $sth->bindParam(1, $name, PDO::PARAM_INT);

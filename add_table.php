@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Add Product</title>
+        <title>Add Table</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
         <script src="js/jquery-1.11.1.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>        
+        <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
 
         <script type="text/javascript" language="javascript">
 
@@ -77,7 +77,7 @@
 	                                $sth = $DBH->prepare($sql);
 
 	                                $sth->bindParam(1,$table_code, PDO::PARAM_INT);
-	                                $sth->bindParam(2,$comp_id, PDO::PARAM_INT);                                
+	                                $sth->bindParam(2,$comp_id, PDO::PARAM_INT);
 	                                $sth->execute();
                             	}
                             } catch(PDOException $e) {
@@ -101,7 +101,7 @@
                 ?>
 
                 <form action="add_table.php" method="post" onsubmit="return validateMyForm(this);">
-                    <label for="name">Code:</label>
+                    <label for="table_code">Code:</label>
                     <input type="text" data-clear-btn="true" name="table_code" id="table_code" value="<?php echo (isset($_POST['table_code']) && !$registered) ? $_POST['table_code'] : '' ?>">
                     <button type="submit" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Save</button>
                     <a href="manage_table.php" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-b" >Return</a>

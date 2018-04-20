@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Account Administrator</title>
+        <title>Administrator</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
         <script src="js/jquery-1.11.1.min.js"></script>
@@ -27,7 +27,7 @@
                 <a href="manage_product.php" data-transition="slide" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b ui-shadow">Manage Products</a>
                 <a href="manage_table.php" data-transition="slide" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b">Manage Tables</a>
                 <a href="edit_user.php" data-transition="slide" class="ui-btn ui-icon-gear ui-btn-icon-left ui-btn-b">Edit My Profile</a>
-                
+
                 <form action="index.php" method="post"><button type="submit" id="hLogout" name="hLogout" data-transition="slide" class="ui-btn ui-icon-power ui-btn-icon-left ui-btn-b">Log out</button></form>
             </div><!-- /content -->
 
