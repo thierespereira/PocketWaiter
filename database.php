@@ -4,13 +4,13 @@
         //Type of DB
         $DB_TYPE = 'mysql';
         //Host Name
-        $DB_HOST = 'eu-cdbr-west-02.cleardb.net';
+        $DB_HOST = 'zwgaqwfn759tj79r.chr7pe7iynqr.eu-west-1.rds.amazonaws.com';
         //Host Username
-        $DB_USER = 'b0ca8bf99caa9b';
+        $DB_USER = 'sx99dk46xxn7t3bf';
         //Host Password
-        $DB_PASS = '58c6a701';
+        $DB_PASS = 'at0coe8avypl2e1n';
         //DB Name
-        $DB_NAME = 'heroku_4d5a25fca0bc072';
+        $DB_NAME = 'dclfxlmdymnwb73w';
 
         $connStr = "mysql:host=".$DB_HOST.";port=3306;dbname=".$DB_NAME;
         $DBH = new PDO($connStr,$DB_USER,$DB_PASS);

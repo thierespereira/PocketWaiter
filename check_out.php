@@ -36,7 +36,7 @@
                             } else {
                                 if(isset($_POST['confirm'])) {
                                     try {
-                                        $sql = "insert into `pocketwaiter`.`order` (`user_id`, `total`, `date_time_of_creation`, `status`, `table_id`) values ('" . $_SESSION['user_id'] . "', '0.00', Now(), 'Open', " . $_SESSION['table_id'] . ");";
+                                        $sql = "insert into `order` (`user_id`, `total`, `date_time_of_creation`, `status`, `table_id`) values ('" . $_SESSION['user_id'] . "', '0.00', Now(), 'Open', " . $_SESSION['table_id'] . ");";
 
                                         $sth = $DBH->prepare($sql);
 
@@ -59,14 +59,14 @@
                                             if ($sth->rowCount() > 0) {
                                                 $rec = $sth->fetch(PDO::FETCH_ASSOC);
                                                 $total = $total + $rec['price'];
-                                                $sql2 = "insert into `pocketwaiter`.`order_items` (`order_id`, `item`, `product_id`) values ('" . $OrderId . "', '" .  $item . "', '" . $value . "');";
+                                                $sql2 = "insert into `order_items` (`order_id`, `item`, `product_id`) values ('" . $OrderId . "', '" .  $item . "', '" . $value . "');";
                                                 $sth2 = $DBH->prepare($sql2);
                                                 $sth2->execute();
                                                 $item = $item + 1;
                                             }
                                         }
 
-                                        $sql = "update `pocketwaiter`.`order` set `total`='" . $total ."' where  `id`=" . $OrderId . ";";
+                                        $sql = "update `order` set `total`='" . $total ."' where  `id`=" . $OrderId . ";";
 
                                         $sth = $DBH->prepare($sql);
                                         $sth->execute();
