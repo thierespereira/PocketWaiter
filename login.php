@@ -20,22 +20,23 @@
     <body>
         <div data-role="page" style="width=100%; margin:0;" data-theme="b">
             <script type="text/javascript" language="javascript">
-                function validateMyForm(form) {
+                function validateMyForm() {
+                    var form = document.forms['login_form'];
                     $("#errorMessage").html('');
                     var ret = true;
                     var re_mail = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z])+$/;
 
-                    if (!form.email.value.trim()) {
+                    if (!form['email'].value.trim()) {
                         $("#errorMessage").append('Please enter an email.<br>');
                         ret = false;
                     } else {
-                        if (!re_mail.test(email.value.trim())) {
+                        if (!re_mail.test(form['email'].value.trim())) {
                             $("#errorMessage").append('Please enter a valid email.<br>');
                             ret = false;
                         }
                     }
 
-                    if(!form.password.value.trim()) {
+                    if(!form['password'].value.trim()) {
                         $('#errorMessage').append('Please enter a password.');
                         ret = false;
                     }
@@ -144,8 +145,8 @@
                         }
                     }
                 ?>
-                
-                <form action="login.php" method="post" onsubmit="return validateMyForm(this);">
+
+                <form action="login.php" name="login_form" method="post" onsubmit="return validateMyForm();">
                     <label for="email">E-mail:</label>
                     <input type="text" data-clear-btn="true" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
                     <label for="password">Password:</label>

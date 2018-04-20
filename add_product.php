@@ -149,7 +149,7 @@
                     }
                 ?>
 
-                <form enctype="multipart/form-data"  name="add_product_form" data-ajax="false" action="add_product.php" method="post" onsubmit="return validateMyForm(this);">
+                <form enctype="multipart/form-data"  name="add_product_form" data-ajax="false" action="add_product.php" method="post" onsubmit="return validateMyForm();">
                     <label for="name">Name:</label>
                     <input type="text" data-clear-btn="true" name="name" id="name" value="<?php echo (isset($_POST['name']) && !$registered) ? $_POST['name'] : '' ?>">
                     <label for="description">Description:</label>
