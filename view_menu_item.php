@@ -7,6 +7,7 @@
         <title>View Product</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
+        <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
         <script src="js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
         <style>
@@ -38,7 +39,7 @@
                     try {
                         $productId = $_GET['id'];
                         $code = $_SESSION['code'];
-                        
+
                         include('database.php');
 
                         $sql = 'select * from product where id = ?';
