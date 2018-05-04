@@ -32,8 +32,8 @@
                         $('#errorMessage').append('Enter a password.<br>');
                         ret = false;
                     } else {
-                        if(form['password'].value.trim().length < 6) {
-                            $('#errorMessage').append('The password is too short - Minimum 6 characteres!<br>');
+                        if(form['password'].value.trim().length < 8) {
+                            $('#errorMessage').append('The password is too short - Minimum 8 characteres!<br>');
                             ret = false;
                         }
 

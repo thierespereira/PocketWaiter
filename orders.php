@@ -33,7 +33,7 @@
                 try {
                     include('database.php');
 
-                    $sql = 'select `order`.*, code from `order` inner join `comptable` on `order`.table_id = `comptable`.id where `user_id` = ? order by `date_time_of_creation` desc;';
+                    $sql = 'select `order`.*, code, `company`.name from `order` inner join `comptable` inner join `company` on `order`.table_id = `comptable`.id and `comptable`.comp_id = `company`.id where `user_id` = ? order by `date_time_of_creation` desc;';
                     $sth = $DBH->prepare($sql);
                     $sth->bindparam(1, $_SESSION['user_id'], PDO::PARAM_INT);
 
@@ -41,7 +41,7 @@
 
                     if($sth->rowcount() > 0) {
                         while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-                            echo '  <h4> Table: ' . $row['code'] . ' <br> Created on: ' . $row['date_time_of_creation'] .' <br> Status: ' . $row['status'] . ' <br> Total: €' . $row['total'] .'</h4>';
+                            echo '  <h4> Restaurant: ' . $row['name'] . ' - Table: ' . $row['code'] . ' <br> Created on: ' . $row['date_time_of_creation'] .' <br> Status: ' . $row['status'] . ' <br> Total: €' . $row['total'] .'</h4>';
                             echo '  <table data-role="table" id="movie-table-custom" data-mode="reflow" class="movie-list ui-responsive table-stripe">';
                             echo '<thead style = "background:#575757;">';
                             echo '<tr>';
