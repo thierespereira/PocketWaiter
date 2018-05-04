@@ -34,6 +34,7 @@
 
             <?php
                 if($_POST){
+                    $_SESSION['cart'] = array();
                     $code = $_POST['code'];
                     $error = '';
 
@@ -81,7 +82,7 @@
                         }
                     }
                 ?>
-                <form action="index.php" name="scan_code_form" method="post" onsubmit="return validateMyForm();">
+                <form action="scan_code.php" name="scan_code_form" method="post" onsubmit="return validateMyForm();">
                     <center><label for="code">Enter table code</label></center>
                     <input type="text" data-clear-btn="true" name="code" id="code" value="<?php echo isset($_POST['code']) ? $_POST['code'] : '' ?>">
                     <button type="submit" data-transition="slide" class="ui-btn ui-btn-b" >OK</button>

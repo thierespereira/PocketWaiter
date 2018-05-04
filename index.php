@@ -33,6 +33,7 @@
 
             <?php
                 if($_POST){
+                    $_SESSION['cart'] = array();
                     $code = $_POST['code'];
                     $error = '';
 
