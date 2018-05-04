@@ -19,7 +19,10 @@
                 <?php
 
                 if(!isset($_SESSION['user_type'])) {
+                    $message = "Please log in to continue";
+                    echo "<script type='text/javascript'>alert('$message');</script>";
                     echo '<script>window.location = "index.php" </script>';
+
                     die;
                 }
 
