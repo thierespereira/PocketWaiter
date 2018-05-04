@@ -187,11 +187,11 @@
                                 echo '<br>';
                                 echo '</div><br>';
                             } else {
-                                if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') {
-                                    echo '<script>window.location = "administrator.php" </script>';
-                                } else {
-                                    echo '<script>window.location = "index.php" </script>';
-                                }
+                                echo '<div id="message" style="background-color:lightgreen;">';
+                                echo 'Registered successfully.<br>';
+                                echo 'Please click <a href="index.php" data-transition="slide" >here</a> to log in.';
+                                echo '<br>';
+                                echo '</div><br>';
                             }
                         }
                     ?>
