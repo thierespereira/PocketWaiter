@@ -60,6 +60,7 @@
                         $error .= 'You must enter a valid password!<br>';
                     }
 
+                    /*
                     include_once '/securimage/securimage.php';
 
                     $securimage = new Securimage();
@@ -68,6 +69,7 @@
                         $error .= 'The security code entered was incorrect!<br />';
 
                     }
+                    */
 
                     if($error == '') {
                         // DB
