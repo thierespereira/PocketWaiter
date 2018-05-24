@@ -32,7 +32,7 @@
                     try {
                         include('database.php');
 
-                        $sql = 'select * from `order` where status = "Open" order by date_time_of_creation;';
+                        $sql = 'select * from `order` where status = "Open" order by date_time_of_creation desc;';
                         $sth = $DBH->prepare($sql);
                         $sth->execute();
 
