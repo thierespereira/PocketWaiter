@@ -5,6 +5,7 @@
 <html>
     <head>
         <title>Kitchen</title>
+        <meta http-equiv="refresh" content="15" >
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
         <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
