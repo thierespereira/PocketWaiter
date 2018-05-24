@@ -131,7 +131,7 @@
                             echo '</table>';
                             echo '<form action="check_out.php" method="post">';
                             echo '  <span><button type="submit" data-transition="slide"  id="confirm" name="confirm" class="ui-btn ui-icon-check ui-btn-icon-left ui-btn-b">Pay</button>';
-                            echo '  <center><div id="paypal-button"></div></center></span>';
+                            echo '  <center><div><img src="images/paypalbutton.png"></div></center></span>';
                             echo '</form>';
                         } else {
                             echo '<center>Your cart is empty!</center>';
