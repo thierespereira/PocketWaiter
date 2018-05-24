@@ -150,58 +150,5 @@
             </div><!-- /footer -->
 
         </div><!-- /page -->
-        <div id="paypal-button"></div>
-
-  <script>
-    paypal.Button.render({
-      env: 'sandbox',
-
-      client: {
-            sandbox:    'Ad-SKOS-SkeJkGTyeMN6xLP9gGKXs9-t3vcDQO0jwh35Sq1BxQXDXkTxeHyWU2buJjN-1qTF-DE5grwY',
-            production: 'AemPGTZfQ-3E0ZZxTT5uNiZvswPyrNEm9x_eHQGeXh7Nu2OssjKeCVKqDFMNKHraiG61sC7Q72g_rLDC'
-        },
-
-      commit: true, // Show a 'Pay Now' button
-
-      style: {
-        color: 'blue',
-        size: 'large',
-        shape: 'rect',
-        tagline: false
-      },
-
-      payment: function(data, actions) {
-          return actions.payment.create({
-                  payment: {
-                      transactions: [
-                          {
-                                  amount: { total: '9.90', currency: 'EUR' }
-                          }
-                      ]
-                  }
-              });
-      },
-
-      onAuthorize: function(data, actions) {
-          return actions.payment.execute().then(function(payment) {
-
-                  alert("The payment is complete!");
-
-              });
-      },
-
-      onCancel: function(data, actions) {
-        /*
-         * Buyer cancelled the payment
-         */
-      },
-
-      onError: function(err) {
-        /*
-         * An error occurred during the transaction
-         */
-      }
-    }, '#paypal-button');
-  </script>
     </body>
 </html>
